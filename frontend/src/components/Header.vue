@@ -5,7 +5,7 @@ import TopNavigation from "./TopNavigation.vue";
 
 <template>
   <div>
-    <img src="/src/assets/Discord_Avatar_2024.svg" width=50 height=50 />
+    <img src="/src/assets/CatHead24_nerd.svg" width=50 height=50  alt=""/>
     <TopNavigation />
   </div>
 </template>
