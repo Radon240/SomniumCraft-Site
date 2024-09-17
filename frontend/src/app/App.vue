@@ -1,6 +1,6 @@
 <script setup lang="ts">
 
-import DefaultView from "./views/DefaultView.vue";
+import DefaultView from "../pages/wiki/ui.vue";
 </script>
 
 <template>
