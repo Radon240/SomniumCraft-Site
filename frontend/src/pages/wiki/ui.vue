@@ -1,8 +1,8 @@
 <script setup lang="ts">
 
-import BaseLayout from "../layouts/BaseLayout.vue";
-import Footer from "../components/Footer.vue";
-import Header from "../components/Header.vue";
+import BaseLayout from "../../widgets/base-layout/ui.vue";
+import Footer from "../../widgets/footer/ui.vue";
+import Header from "../../widgets/header/ui.vue";
 </script>
 
 <template>

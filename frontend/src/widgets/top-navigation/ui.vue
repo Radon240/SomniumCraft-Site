@@ -1,6 +1,6 @@
 <script setup lang="ts">
 
-import TopNavigationButton from "./TopNavigationButton.vue";
+import TopNavigationButton from "../../shared/top-navigation-button/ui.vue";
 </script>
 
 <template>
