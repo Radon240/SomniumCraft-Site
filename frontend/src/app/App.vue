@@ -1,12 +1,23 @@
 <script setup lang="ts">
 
-import DefaultView from "../pages/wiki/ui.vue";
+import Header from "..//widgets/header/ui.vue"
+import Footer from "..//widgets/footer/ui.vue"
+
 </script>
 
 <template>
-  <DefaultView/>
+  <div id="app">
+    <Header />
+    <router-view />
+    <Footer />
+  </div>
 </template>
 
 <style scoped>
+#app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Ensure the app takes at least the full viewport height */
+}
 
 </style>
