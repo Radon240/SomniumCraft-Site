@@ -4,6 +4,32 @@
   --background-color: #181c27;
   --text-color: #ffffff;
 
+  --vt-c-white: #ffffff;
+  --vt-c-white-soft: #f8f8f8;
+  --vt-c-white-mute: #f2f2f2;
+
+  --vt-c-black: #181818;
+  --vt-c-black-soft: #222222;
+  --vt-c-black-mute: #282828;
+
+  --vt-c-indigo: #2c3e50;
+
+  --vt-c-divider-light-1: rgba(60, 60, 60, 0.29);
+  --vt-c-divider-light-2: rgba(60, 60, 60, 0.12);
+  --vt-c-divider-dark-1: rgba(84, 84, 84, 0.65);
+  --vt-c-divider-dark-2: rgba(84, 84, 84, 0.48);
+  --white: #FFFFFF;
+  --background: #0E0F14;
+  --pastel-blauw: #699BF6;
+  --box-shadow: 0 .5rem 1rem rgba(0,0,0, 0.5);
+  --height: 5rem;
+  --vt-c-text-light-1: var(--vt-c-indigo);
+  --vt-c-text-light-2: rgba(60, 60, 60, 0.66);
+  --vt-c-text-dark-1: var(--vt-c-white);
+  --vt-c-text-dark-2: rgba(235, 235, 235, 0.64);
+
   font-size: 16px;
+  line-height: 1.6;
   color: var(--text-color);
+  background: var(--background-color);
 }
