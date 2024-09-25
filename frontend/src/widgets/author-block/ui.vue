@@ -48,9 +48,10 @@ export default {
 
 <style scoped>
 .author-card {
-  border: 1px solid #ddd;
   padding: 16px;
   border-radius: 8px;
+  width: 25%;
+
   background-color: var(--background-color);
 }
 

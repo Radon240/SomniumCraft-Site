@@ -34,10 +34,8 @@ export default {
 
 <style scoped>
 .article {
-  border: 1px solid #ddd;
-  padding: 16px;
+  width: 70%;
   background-color: var(--background-color);
-  border-radius: 8px;
 }
 
 .article h1 {
@@ -50,10 +48,8 @@ export default {
 }
 
 .article-content h2, h3 {
-  margin-top: 16px;
 }
 
 .article-content p {
-  margin: 8px 0;
 }
 </style>

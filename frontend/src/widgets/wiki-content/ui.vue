@@ -2,7 +2,7 @@
 
 import AuthorCard from "../author-block/ui.vue";
 import Article from "../article-content/ui.vue";
-import ArticlesList from "../articles-list/ui.vue";
+import ArticlesList from "../article-by-category-list/ui.vue";
 </script>
 
 <template>

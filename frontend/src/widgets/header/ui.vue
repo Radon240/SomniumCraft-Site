@@ -13,7 +13,7 @@
 
     <nav class="navbar">
       <router-link to="/main">Test</router-link>
-      <router-link to="/wiki">Wiki</router-link>
+      <router-link :to="{name:'wiki'}">Wiki</router-link>
     </nav>
 
     <div class="container">
