@@ -3,8 +3,8 @@ import { createRouter, createWebHistory } from 'vue-router';
 import WikiPage from "..//pages/wiki/ui.vue"
 
 const routes= [
-    //{ path: '/main', name: 'MainPage', component: MainPage },
-    { path: '/wiki', name: 'WikiPage', component: WikiPage },
+    //{ path: '/', name: 'MainPage', component: MainPage },
+    { path: '/', name: 'wiki', component: WikiPage },
     { path: '/resources', name: 'Resources'}
 ]
 
