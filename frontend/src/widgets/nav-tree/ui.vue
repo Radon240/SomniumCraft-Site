@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {type NavTree} from "../../entities/nav-tree/model/types.ts";
+import {type NavTree} from "../../entities/NavTree/model/types.ts";
 import TreeNav from "./recursiveNav.vue";
 
 const props = defineProps<{
