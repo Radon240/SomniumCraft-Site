@@ -7,7 +7,7 @@
   <header>
     <a href="/main" class="logo">
       <div class="logo-img">
-        <img src="../../assets/CatHead24.svg" draggable="false" />
+        <img src="../../resources/images/CatHead24.svg" draggable="false" />
       </div>
     </a>
 
@@ -18,7 +18,7 @@
 
     <div class="container">
       <div class="avatar">
-        <img src="../../assets/steve.png" draggable="false"/>
+        <img src="../../resources/images/steve.png" draggable="false"/>
       </div>
       <div class="info">
         <span>Приветствуем, Незнакомец</span>
