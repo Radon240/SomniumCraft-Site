@@ -62,7 +62,7 @@ export default {
 
 <style>
 :root {
-  --font-size-button: 2rem;
+  --font-size-button: 1.3rem;
 }
 
 * {

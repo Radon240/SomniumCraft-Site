@@ -2,6 +2,7 @@
   <div class="newsSection">
     <div class="newsBar">
       <font-awesome-icon :icon="['fas', 'rotate-right']" />
+
       <span>Новости</span>
     </div>
     <div class="news">
@@ -83,10 +84,10 @@ export default {
 
 .newsSection {
   //width: 60%;
-  width: 90rem;
+  width: 60rem;
   display: flex;
   flex-direction: column;
-  padding: 4rem 2rem;
+  padding: 2rem 1rem;
   align-items: end;
 
 }
@@ -98,10 +99,10 @@ export default {
   background-color: #191C25;
   width: 100%;
   margin-bottom: 2rem;
-  font-size: 3rem;
+  font-size: 2rem;
   border-radius: 30px;
-  padding: 0.5rem 2rem;
-  gap: 2rem;
+  padding: 0.5rem 1rem;
+  gap: 1rem;
 }
 
 .news {

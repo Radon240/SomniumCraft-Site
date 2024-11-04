@@ -56,8 +56,6 @@ export default {
 <style>
 
 * {
-  margin: 0;
-  padding: 0;
   box-sizing: border-box;
   font-family: "Roboto", sans-serif;
   font-weight: 700;
@@ -67,27 +65,16 @@ export default {
   text-decoration: none;
   list-style:none;
   text-transform: capitalize;
-}
-
-
-
-html{
-  font-size: 62.5%;
-
 
 }
-body{
 
 
-  height: 100vh; /* Sets the height to full viewport height */
-  margin: 0; /* Removes default margin */
 
 
-}
 header {
   position:fixed;
   width: 100%;
-  height: 7rem;
+  height: 5rem;
   top: 0;
   left: 0;
   background: rgba(14,15,20,0.8);
@@ -102,7 +89,7 @@ header {
   gap: 1.5rem;
 }
 header .logo {
-  font-size: 3rem;
+  font-size: 2rem;
   color: var(--white);
   transition: 0.5s;
 }
@@ -115,8 +102,8 @@ header .logo span{
 
 }
 header .logo-img {
-  width: 8rem;
-  height: 8rem;
+  width: 5rem;
+  height: 5rem;
   border-radius: 2rem;
 
 }
@@ -138,12 +125,12 @@ header .logo-img:hover img {
   transition: all 1s ease;
 }
 header .navbar{
-
+  display: flex;
+  gap: 2rem;
 }
 header .navbar a{
   margin-right: auto;
-  font-size: 2rem;
-  margin-left: 2rem;
+  font-size: 1.5rem;
   color: var(--white);
   transition: 0.5s;
 
@@ -157,7 +144,7 @@ header input{
   display: none;
 }
 header label {
-  font-size: 3rem;
+  font-size: 2rem;
   color: var(--white);
   cursor: pointer;
   visibility: hidden;
@@ -167,14 +154,15 @@ header label {
 header .container {
   display: flex;
   align-items: center;
+  gap: 1rem;
 
 }
 
 header .avatar img {
-  width: 5rem;
-  height: 5rem;
-  border-radius: 1rem;
-  margin-right: 1rem;
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 20%;
+
   border: 2px solid rgba(255,255,255, 0.1);
 }
 header .info{
@@ -184,7 +172,7 @@ header .info{
   align-content: center;
 }
 header .info span {
-  font-size: 1.6rem;
+  font-size: 1rem;
   color: white;
   font-weight: bold;
   margin-bottom: 0.5rem;
@@ -200,7 +188,7 @@ header .info .buttons button {
   border: 1px solid rgba(255,255,255, 0.1);
   background: transparent;
   color: white;
-  font-size: 1.4rem;
+  font-size: 1rem;
   border-radius: 0.5rem;
   cursor: pointer;
   transition: 0.3s;
@@ -230,11 +218,15 @@ header .buttons button:hover {
 
 
   header .navbar {
+
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
     position: absolute;
     top: 100%;
     left: 0;
     width: 100%;
-    padding: 1rem 2rem;
+    padding: 0.5rem 2rem;
     border-top: .1rem solid rgba(0,0,0, 0.1);
     box-shadow: var(--box-shadow);
     transform-origin: top;
@@ -245,7 +237,7 @@ header .buttons button:hover {
   }
   header .navbar a {
     display: block;
-    margin: 2rem 0;
+
     font-size: 1.8rem;
 
   }

@@ -41,11 +41,7 @@
   color: var(--white);
 
 }
-html{
-  font-size: 62.5%;
 
-
-}
 
 footer{
   background-image: url("@resources/images/backgroundIce.png"); /* Фон для основного контейнера */
@@ -58,7 +54,7 @@ footer{
   bottom: 0;
   left: 0;
   right: 0;
-  min-height: 5rem;
+  min-height: 3rem;
 
 
 
@@ -92,12 +88,12 @@ footer .footer-content .footer-top-container .icons ul {
   list-style: none; /* Убирает маркеры списка */
   padding: 0; /* Убирает отступы */
   display: flex; /* Располагает элементы в ряд */
-  gap: 5rem; /* Пробел между иконками */
+  gap: 2rem; /* Пробел между иконками */
 }
 
 footer .footer-content .footer-top-container .icons li {
   display: inline-block; /* Чтобы элементы списка располагались в ряд */
-  font-size: 4rem;
+  font-size: 2.5rem;
 }
 footer .icons li:hover {
   -webkit-filter: brightness(70%);
