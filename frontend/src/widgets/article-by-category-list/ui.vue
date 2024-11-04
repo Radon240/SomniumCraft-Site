@@ -1,7 +1,7 @@
 <script setup lang="ts">
 
-import NavTreeComponent from "../nav-tree/ui.vue"
-import {useNavTreeStore} from "../../entities/NavTree";
+import NavTreeComponent from "@/widgets/nav-tree/ui.vue"
+import {useNavTreeStore} from "@/entities/NavTree";
 
 const navTreeStore = useNavTreeStore()
 navTreeStore.loadNavTree()

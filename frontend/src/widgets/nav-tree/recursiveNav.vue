@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import {type NavTreeNode } from "../../entities/NavTree/model/types.ts";
-import {useCategoryArticlesStore} from "../../entities/CategoryArticles";
+import {type NavTreeNode } from "@/entities/NavTree/model/types.ts";
+import {useCategoryArticlesStore} from "@/entities/CategoryArticles";
 
 const props = defineProps<{
   node: NavTreeNode

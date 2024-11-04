@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import WikiContent from "../../widgets/wiki-content/ui.vue"
+import WikiContent from "@/widgets/wiki-content/ui.vue";
+
 </script>
 
 <template>

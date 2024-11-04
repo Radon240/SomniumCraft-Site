@@ -1,4 +1,8 @@
-<script setup lang="ts">
+<script setup>
+import Header from '@/widgets/Header.vue';
+import Footer from '@/widgets/Footer.vue';
+import {computed} from 'vue';
+import {useRoute} from 'vue-router';
 
 import Header from "..//widgets/header/ui.vue"
 import Footer from "..//widgets/footer/ui.vue"
