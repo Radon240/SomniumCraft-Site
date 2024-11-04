@@ -13,13 +13,23 @@ const isMainRoute = computed(() => route.path === '/main');
     <div v-show="isMainRoute" class="background-image"></div>
     <Header />
     <main>
-      <router-view />
+      <transition name ="fade" mode="out-in" appear>
+        <router-view />
+      </transition>
     </main>
     <Footer />
   </div>
 </template>
 
 <style scoped>
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s;
+}
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
 
 html, body{
   min-width: 100%;
