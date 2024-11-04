@@ -4,11 +4,11 @@ import App from './app/App.vue'
 import router from './app/router.ts'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-import { faBars } from '@fortawesome/free-solid-svg-icons'
+import { faBars, faRotateRight } from '@fortawesome/free-solid-svg-icons'
 import { faYoutube, faDiscord } from '@fortawesome/free-brands-svg-icons'
 import {createPinia} from "pinia";
 
-library.add(faBars, faYoutube, faDiscord)
+library.add(faBars, faYoutube, faDiscord, faRotateRight)
 
 const pinia = createPinia()
 const app = createApp(App)

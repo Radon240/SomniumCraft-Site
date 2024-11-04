@@ -9,7 +9,7 @@
 <style scoped>
   h3 {
     margin-top: 7rem;
-    font-size: 10rem;
+    font-size: 5rem;
     text-align: center;
     text-transform: uppercase;
   }
