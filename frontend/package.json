@@ -16,6 +16,7 @@
     "@fortawesome/vue-fontawesome": "^3.0.8",
     "@volar/language-server": "2.4.0-alpha.18",
     "@vue/language-server": "2.0.28",
+    "axios": "^1.7.7",
     "marked": "^14.1.2",
     "modern-normalize": "^3.0.1",
     "pinia": "^2.2.2",
@@ -23,6 +24,7 @@
     "vue-router": "^4.4.5"
   },
   "devDependencies": {
+    "@types/node": "^22.8.7",
     "@vitejs/plugin-vue": "^5.1.2",
     "sass-embedded": "^1.78.0",
     "typescript": "^5.5.3",
