@@ -67,7 +67,7 @@ footer .footer-content{
   background-color: var(--background);
   box-shadow: var(--box-shadow);
   backdrop-filter: blur(5px);
-  border-top: 2px solid rgba(255,255,255, 0.1);
+  border-top: var(--border-header);
 }
 footer .footer-content .footer-top-container{
 

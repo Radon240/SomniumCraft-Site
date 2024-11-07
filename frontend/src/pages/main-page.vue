@@ -33,37 +33,40 @@ export default {
   },
   methods: {
     copyIP() {
-      // Копируем текст в буфер обмена
-      navigator.clipboard.writeText('play.somnium-craft.su')
-          .then(() => {
-            // Показать уведомление
-            this.showNotification = true;
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText('play.somnium-craft.su')
+            .then(() => {
+              console.log("IP скопирован!");
 
-            // Убрать уведомление через 2 секунды с анимацией
-            setTimeout(() => {
-              const toast = document.querySelector('.custom-toast');
-              if (toast) {
-                toast.classList.add('fade-out');
-              }
-            }, 1500);
+              // Показать уведомление
+              this.showNotification = true;
 
-            // Скрыть уведомление после анимации
-            setTimeout(() => {
-              this.showNotification = false;
-            }, 2000);
-          })
-          .catch(err => {
-            console.error('Failed to copy: ', err);
-          });
+              // Убрать уведомление с анимацией через 1.5 секунды
+              setTimeout(() => {
+                const toast = document.querySelector('.custom-toast');
+                if (toast) {
+                  toast.classList.add('fade-out');
+                }
+              }, 1500);
+
+              // Полностью скрыть уведомление после завершения анимации
+              setTimeout(() => {
+                this.showNotification = false;
+              }, 2000);
+            })
+            .catch(err => {
+              console.error("Ошибка при копировании: ", err);
+            });
+      }
+      // Если Clipboard API не поддерживается, ничего не выполняется.
     }
+
   }
 }
 </script>
 
 <style>
-:root {
-  --font-size-button: 1.3rem;
-}
+
 
 * {
   margin: 0;
@@ -150,11 +153,14 @@ main .top-content .button-container button:hover {
 
 main .features-content {
   background-color: var(--background);
-  min-height: 90vh;
+  max-height: 10%!important;
   width: 100%;
   display: flex;
   justify-content: center;
-
+  padding-right: 10rem;
+  padding-left: 10rem;
+  padding-bottom: 5%;
+  gap: 3rem;
 }
 
 .custom-toast {
@@ -211,11 +217,13 @@ main .features-content {
   .custom-toast {
     font-size: 90%;
   }
+
+
 }
 
 @media (max-width: 770px) {
   :root {
-    --font-size-button: 1.3rem;
+    --font-size-button: 0.8rem;
   }
   .custom-toast {
     font-size: 70%;

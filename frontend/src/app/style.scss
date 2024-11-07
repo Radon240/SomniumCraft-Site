@@ -1,9 +1,12 @@
 @import '../../node_modules/modern-normalize/modern-normalize.css';
 
 :root{
+  --font-size-button: 1.3rem;
   --background-color: #181c27;
+  --second-background-color: 25, 28, 37;
   --text-color: #ffffff;
-
+  --background-header:14,15,20,0.8 ;
+  --border-header: 2px solid rgba(255,255,255, 0.1);
   --vt-c-white: #ffffff;
   --vt-c-white-soft: #f8f8f8;
   --vt-c-white-mute: #f2f2f2;
@@ -27,10 +30,11 @@
   --vt-c-text-light-2: rgba(60, 60, 60, 0.66);
   --vt-c-text-dark-1: var(--vt-c-white);
   --vt-c-text-dark-2: rgba(235, 235, 235, 0.64);
-  --scrollbar-width: 12px; /* ширина scrollbar */
+  --scrollbar-width: 9px; /* ширина scrollbar */
   --scrollbar-height: 9px; /* высота scrollbar */
   --scrollbar-track-color: #191C25; /* цвет дорожки */
   --scrollbar-thumb-color: #989AA6; /* цвет плашки */
+
 
   font-size: 15px;
   line-height: 1.6;
@@ -52,10 +56,12 @@
 ::-webkit-scrollbar {
   width: var(--scrollbar-width);
   height: var(--scrollbar-height);
+
 }
 
 ::-webkit-scrollbar-track {
   background-color: var(--scrollbar-track-color);
+  border-radius: 7px; /* Скругление дорожки */
 }
 
 ::-webkit-scrollbar-thumb {

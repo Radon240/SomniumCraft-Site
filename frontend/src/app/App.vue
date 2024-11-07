@@ -40,10 +40,8 @@ html, body{
   min-width: 100%;
   display: flex;
   flex-direction: column;
-  min-height: 100vh; /* Ensure the app takes at least the full viewport height */
-
-
-  overflow-x: hidden/* Ensure the background image is positioned relative to this container */
+  min-height: 100vh;
+  overflow-x: hidden
 
 }
 
@@ -52,12 +50,12 @@ html, body{
   top: 0;
   left: 0;
   width: 100%;
-  height: 100vh; /* Cover the whole viewport height */
-  background-image: url("@/resources/images/backgroundIce.png"); /* Укажите путь к вашему изображению */
+  height: 100vh;
+  background-image: url("@/resources/images/backgroundIce.png");
   background-repeat: no-repeat;
-  background-position: center; /* Центрирование изображения */
-  background-size: cover; /* Сделать изображение адаптивным */
-  z-index: -1; /* Поместить фоновое изображение под другими элементами */
+  background-position: center;
+  background-size: cover;
+  z-index: -1;
 }
 
 header {
@@ -70,6 +68,7 @@ main {
 }
 
 footer {
-  /* Styling for the footer if needed */
+
 }
+
 </style>

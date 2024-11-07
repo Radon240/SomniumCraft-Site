@@ -77,16 +77,17 @@ header {
   height: 5rem;
   top: 0;
   left: 0;
-  background: rgba(14,15,20,0.8);
+  background: rgba(var(--background-header));
   box-shadow: var(--box-shadow);
   padding: 2rem 8%;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
+
   align-items: center;
   z-index: 100;
-  border-bottom: 2px solid rgba(255,255,255, 0.1); /* Параметры линии внизу */
+  border-bottom: var(--border-header); /* Параметры линии внизу */
   backdrop-filter: blur(3px);
-  gap: 1.5rem;
+  gap: 10%;
 }
 header .logo {
   font-size: 2rem;
@@ -162,8 +163,7 @@ header .avatar img {
   width: 3.5rem;
   height: 3.5rem;
   border-radius: 20%;
-
-  border: 2px solid rgba(255,255,255, 0.1);
+  border: var(--border-header);
 }
 header .info{
   display: flex;
@@ -172,6 +172,7 @@ header .info{
   align-content: center;
 }
 header .info span {
+  white-space: nowrap;
   font-size: 1rem;
   color: white;
   font-weight: bold;
@@ -181,6 +182,7 @@ header .info span {
 header .info .buttons {
   display: flex;
   gap: 1rem;
+
 }
 
 header .info .buttons button {
@@ -197,6 +199,7 @@ header .info .buttons button {
 
 header .buttons button:hover {
   background-color: var(--pastel-blauw);
+  transition: all 1s ease;
 
 }
 
@@ -205,16 +208,16 @@ header .buttons button:hover {
 @media (max-width: 1200px) {
   html {
     font-size: 55%;
+
   }
 }
-
 @media (max-width: 770px) {
-  header label{
+  header label {
     visibility: visible;
-    opacity:1;
-  
-
+    opacity: 1;
   }
+
+
 
 
   header .navbar {
@@ -232,13 +235,15 @@ header .buttons button:hover {
     transform-origin: top;
     transform: scale(0);
     opacity: 0;
-    background-color: rgba(14,15,20,0.8);
+    background-color: rgba(var(--background-header));
     backdrop-filter: blur(3px);
+
+
   }
   header .navbar a {
     display: block;
 
-    font-size: 1.8rem;
+    font-size: 100%;
 
   }
   header input:checked ~ .navbar {
@@ -258,6 +263,7 @@ header .buttons button:hover {
   }
 
 }
+
 
 @media (max-width: 450px) {
   html {
