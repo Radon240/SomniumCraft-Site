@@ -21,3 +21,19 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.blogSection {
+  width: 30rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: rgba(69, 65, 65, 0.48);
+  border-radius: 1rem;
+  max-height: 30vw;
+  overflow-y: auto;
+  margin-left: 3rem;
+  margin-top: 2rem;
+}
+
+</style>
