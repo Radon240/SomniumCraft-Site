@@ -32,7 +32,7 @@ const isMainRoute = computed(() => route.path === '/main');
 }
 
 html, body{
-  min-width: 100%;
+  width: 100%;
   margin: 0;
 }
 #app {

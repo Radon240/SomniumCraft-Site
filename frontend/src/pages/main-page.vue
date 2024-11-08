@@ -108,7 +108,7 @@ main .top-content {
   font-size: calc(var(--font-size-button) * 4);
   width: 100%;
   z-index: 10;
-  min-height: 60vh;
+  min-height: 50vh;
   background-color: rgba(4, 4, 4, 0.4);
   backdrop-filter: blur(4px);
 
@@ -153,7 +153,7 @@ main .top-content .button-container button:hover {
 
 main .features-content {
   background-color: var(--background);
-  max-height: 10%!important;
+
   width: 100%;
   display: flex;
   justify-content: center;

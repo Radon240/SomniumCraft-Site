@@ -34,12 +34,12 @@ export default {
       <router-link to="/main">Главная</router-link>
       <router-link to="/wiki">Вики</router-link>
       <router-link to="/map">Карта</router-link>
-      <router-link to="/404">Правила</router-link>
+      <router-link to="/rules">Правила</router-link>
       <router-link to="/404">Прочее</router-link>
 
     </nav>
 
-    <div class="container">
+    <div class="containerInfo">
       <div class="avatar">
         <img src="@/resources/images/steve.png" draggable="false"/>
       </div>
@@ -150,15 +150,19 @@ header label {
   cursor: pointer;
   visibility: hidden;
   opacity: 0;
+  display: none;
 }
 
-header .container {
+header .containerInfo {
   display: flex;
   align-items: center;
   gap: 1rem;
 
 }
-
+img, video {
+  max-width: none;
+  height: auto;
+}
 header .avatar img {
   width: 3.5rem;
   height: 3.5rem;
@@ -170,27 +174,28 @@ header .info{
   flex-direction: column;
   justify-content: center;
   align-content: center;
+  gap:0.5rem
 }
 header .info span {
   white-space: nowrap;
   font-size: 1rem;
   color: white;
   font-weight: bold;
-  margin-bottom: 0.5rem;
+
 }
 
 header .info .buttons {
   display: flex;
-  gap: 1rem;
+
 
 }
 
 header .info .buttons button {
-  padding: 0.5rem 1.5rem;
+  padding: 0.5rem 0.1%;
   border: 1px solid rgba(255,255,255, 0.1);
   background: transparent;
   color: white;
-  font-size: 1rem;
+  font-size: 0.9rem;
   border-radius: 0.5rem;
   cursor: pointer;
   transition: 0.3s;
@@ -202,7 +207,12 @@ header .buttons button:hover {
   transition: all 1s ease;
 
 }
+@media (max-width: 1280px) {
+  header {
+    gap: 1rem;
 
+  }
+}
 
 /*media queries */
 @media (max-width: 1200px) {
@@ -211,14 +221,12 @@ header .buttons button:hover {
 
   }
 }
-@media (max-width: 770px) {
+@media (max-width: 768px) {
   header label {
     visibility: visible;
     opacity: 1;
+    display: block;
   }
-
-
-
 
   header .navbar {
 
