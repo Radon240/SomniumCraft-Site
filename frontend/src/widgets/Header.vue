@@ -33,9 +33,9 @@ export default {
 
       <router-link to="/main">Главная</router-link>
       <router-link to="/wiki">Вики</router-link>
-      <router-link to="/map">Карта</router-link>
+      <a href="https://world.scmc.dev/" target="_blank">Карта</a>
       <router-link to="/rules">Правила</router-link>
-      <router-link to="/404">Прочее</router-link>
+      <router-link to="/other">Прочее</router-link>
 
     </nav>
 
