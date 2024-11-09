@@ -1,10 +1,13 @@
-module.exports = {
+import withMT from "@material-tailwind/html/utils/withMT";
+
+module.exports = withMT({
   content: ['./index.html', './src/**/*.{vue,js,ts,jsx,tsx}'], // Используем 'content' вместо 'purge'
   darkMode: 'media', // Либо 'media', либо удалите эту строку, если не хотите использовать темную тему
   theme: {
     extend: {
       colors: {
-          'pastel-blauw': '#699BF6'
+        'pastel-blauw': '#699BF6',
+        'background-element': '#1A1C25',
       }
     },
     screens: {
@@ -28,4 +31,4 @@ module.exports = {
     extend: {},
   },
   plugins: [],
-}
+});
