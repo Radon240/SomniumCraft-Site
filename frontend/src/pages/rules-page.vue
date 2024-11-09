@@ -28,7 +28,7 @@ const goToRolesList = () => {
 
   <Menu as="div" class="inline-block text-left w-full h-auto">
     <div class="w-full">
-      <MenuButton class="md:text-base lg:text-lg xl:text-xl text-nowrap inline-flex w-full justify-start gap-x-1.5 rounded-md px-3 py-2 text-sm font-bold text-white-900 shadow-sm ring-inset  hover:bg-pastel-blauw">
+      <MenuButton class="md:text-base lg:text-lg xl:text-xl text-nowrap inline-flex w-full justify-start gap-x-1.5 rounded-md transition-colors duration-300 ease-in-out px-3 py-2 text-sm font-bold text-white-900 shadow-sm ring-inset  hover:bg-pastel-blauw">
           <span class="text-xs md:text-base lg:text-lg xl:text-xl text-nowrap ">
 
             <font-awesome-icon :icon="['fass', 'lines-leaning']" />
@@ -126,6 +126,7 @@ const goToRolesList = () => {
 .navigation {
   width: 15%;
 }
+
 
 .content {
   width: auto;
