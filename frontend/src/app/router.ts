@@ -13,6 +13,18 @@ const routes: Array<RouteRecordRaw> = [
     { path: '/wiki', name: 'WikiPage', component: WikiPage },
     { path: '/blog', name: 'BlogPage', component: BlogPage },
     { path: '/news', name: 'NewsPage', component: NewsPage },
+    {
+        path: '/articles/:articleTitle',
+        name: 'Article',
+        component: WikiPage,
+        props: true
+    },
+    {
+        path: '/categories/:id',
+        name: 'Category',
+        component: WikiPage,
+        props: true
+    },
     { path: '/:pathMatch(.*)*', name: 'NotFound', component: NotFound }
 ];
 
@@ -23,7 +35,7 @@ window.addEventListener('hashchange', () => {
 });
 
 const currentView = computed((): typeof NotFound => {
-    return routes[currentPath.value.slice(1) || '/'] || NotFound;
+    return routes[!(!currentPath.value.slice(1) && !'/')] || NotFound;
 });
 
 const router = createRouter({

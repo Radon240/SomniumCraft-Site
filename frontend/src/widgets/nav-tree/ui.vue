@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {type NavTree} from "@/entities/NavTree/model/types.ts";
+import { type NavTree } from "@/entities/NavTree/model/types.ts";
 import TreeNav from "./recursiveNav.vue";
 
 const props = defineProps<{
@@ -8,25 +8,13 @@ const props = defineProps<{
 </script>
 
 <template>
-  <div class="nav-container">
+  <nav class="m-4 w-fit">
     <ul>
       <TreeNav
-          v-for="node in props.navTree.rootNodes"
+          v-for="node in navTree.rootNodes"
           :key="node.id"
-          :node="node" />
+          :node="node"
+      />
     </ul>
-  </div>
+  </nav>
 </template>
-
-<style scoped>
-ul {
-  list-style-type: none;
-}
-
-.nav-container {
-  margin: 20px;
-
-  width: 25%;
-  color: var(--white)
-}
-</style>

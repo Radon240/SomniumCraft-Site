@@ -1,5 +1,5 @@
 <script lang="ts">
-import { ref, computed } from 'vue';
+import { computed } from 'vue';
 
 export default {
   props: {
@@ -36,7 +36,7 @@ export default {
 </script>
 
 <template>
-  <div class="author-card">
+  <div class="author-card border-solid rounded-xl max-h-fit">
     <div class="author-info">
       <h3>{{ author.name }}</h3>
       <p>Дата публикации: {{ formattedDate }}</p>
@@ -49,8 +49,6 @@ export default {
 <style scoped>
 .author-card {
   padding: 16px;
-  border-radius: 8px;
-  width: 25%;
 
   background-color: var(--background-color);
 }

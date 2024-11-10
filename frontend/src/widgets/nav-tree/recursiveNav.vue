@@ -1,67 +1,56 @@
 <script setup lang="ts">
-import {type NavTreeNode } from "@/entities/NavTree/model/types.ts";
-import {useCategoryArticlesStore} from "@/entities/CategoryArticles";
+import { type NavTreeNode } from "@/entities/NavTree/model/types.ts";
+import { useCategoryArticlesStore } from "@/entities/CategoryArticles";
 
 const props = defineProps<{
   node: NavTreeNode
 }>();
 
-const categoryArticlesStore = useCategoryArticlesStore()
-
+const categoryArticlesStore = useCategoryArticlesStore();
 </script>
 
 <template>
-  <li class="nav-item">
-    <router-link v-if="node.uri" :to="node.uri.toString()" class="nav-link">
-      {{ node.label }}
-    </router-link>
+  <li class="py-2 w-fit">
+    <div class="flex group">
+      <router-link
+          v-if="node.uri"
+          :to="node.uri.toString()"
+          class="text-gray-400 hover:text-white transition-colors duration-200 text-sm"
+      >
+        {{ node.label }}
+      </router-link>
 
-    <span v-else class="nav-label">{{ node.label }}</span>
+      <span
+          v-else
+          class="text-white font-medium text-base"
+      >
+        {{ node.label }}
+      </span>
 
-    <span v-for="categoryArticles in categoryArticlesStore.loadCategoryArticles(node.label.toString())">
-      {{categoryArticles.toString()}}
-    </span>
+      <!--      <span
+          v-for="categoryArticles in categoryArticlesStore.loadCategoryArticles(node.label.toString())"
+          class="ml-2 text-gray-500 text-sm"
+      >
+        {{ categoryArticles.toString() }}
+      </span>-->
+    </div>
 
-    <ul v-if="node.children && node.children.length > 0" class="nav-sublist">
+    <ul
+        v-if="node.children && node.children.length > 0"
+        class="ml-2 mt-1 border-l border-gray-800"
+    >
       <recursive-nav
           v-for="child in node.children"
           :key="child.id"
           :node="child"
+          class="pl-4"
       />
     </ul>
   </li>
 </template>
 
 <style scoped>
-
-.nav-item {
-  list-style-type: none;
-  text-decoration: none;
-  margin: 8px 0;
-}
-
-.nav-link {
-  color: #007bff;
-  text-decoration: none;
-  font-weight: 500;
-  padding: 4px 0;
-  display: block;
-  transition: color 0.3s ease;
-}
-
-.nav-link:hover {
-  color: #0056b3;
-  text-decoration: underline;
-}
-
-.nav-label {
-  font-weight: bold;
-  color: #333;
-}
-
-.nav-sublist {
-  padding-left: 16px;
-  margin-top: 8px;
-  border-left: 1px solid #ddd;
+:deep(.router-link-active) {
+  @apply text-white;
 }
 </style>

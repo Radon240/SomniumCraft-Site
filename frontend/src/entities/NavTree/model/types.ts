@@ -1,4 +1,5 @@
 export interface NavTreeNode{
+    id: String,
     label: String,
     uri?: String
     icon?: String

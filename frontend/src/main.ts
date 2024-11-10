@@ -6,7 +6,9 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { faBars, faRotateRight } from '@fortawesome/free-solid-svg-icons'
 import { faYoutube, faDiscord } from '@fortawesome/free-brands-svg-icons'
-import {createPinia} from "pinia";
+import {createPinia} from "pinia"
+import PrimeVue from 'primevue/config';
+import Aura from '@primevue/themes/aura';
 
 library.add(faBars, faYoutube, faDiscord, faRotateRight)
 
@@ -17,5 +19,10 @@ app.component('font-awesome-icon', FontAwesomeIcon)
 
 app.use(router)
 app.use(pinia)
+app.use(PrimeVue, {
+    theme: {
+        preset: Aura
+    }
+});
 
 app.mount("#app")
