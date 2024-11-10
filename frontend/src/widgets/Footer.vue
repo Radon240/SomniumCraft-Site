@@ -83,6 +83,7 @@ footer .footer-content .footer-top-container{
 }
 footer .footer-content .footer-top-container span{
   font-weight: 300;
+  font-size: 1.1rem;
 }
 footer .footer-content .footer-top-container .icons ul {
   list-style: none; /* Убирает маркеры списка */

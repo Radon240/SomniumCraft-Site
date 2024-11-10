@@ -6,6 +6,8 @@ import BlogPage from "@/features/blog/blog.vue";
 import NewsPage from "@/features/news/news.vue";
 import WikiPage from "@/pages/wiki/ui.vue";
 import NotFound from "@/pages/404.vue";
+import RulesPage from "@/pages/rules-page.vue";
+import OtherPage from "@/pages/other/other-page.vue";
 
 const routes: Array<RouteRecordRaw> = [
     { path: '/', redirect: '/main' },
@@ -13,6 +15,8 @@ const routes: Array<RouteRecordRaw> = [
     { path: '/wiki', name: 'WikiPage', component: WikiPage },
     { path: '/blog', name: 'BlogPage', component: BlogPage },
     { path: '/news', name: 'NewsPage', component: NewsPage },
+    { path: '/rules', name: 'RulesPage', component: RulesPage },
+    { path: '/other', name: 'OtherPage', component: OtherPage },
     {
         path: '/articles/:articleTitle',
         name: 'Article',

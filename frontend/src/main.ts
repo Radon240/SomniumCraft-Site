@@ -3,6 +3,7 @@ import './app/style.scss'
 import App from './app/App.vue'
 import router from './app/router.ts'
 import { library } from '@fortawesome/fontawesome-svg-core'
+import { fas } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { faBars, faRotateRight } from '@fortawesome/free-solid-svg-icons'
 import { faYoutube, faDiscord } from '@fortawesome/free-brands-svg-icons'
@@ -10,7 +11,7 @@ import {createPinia} from "pinia"
 import PrimeVue from 'primevue/config';
 import Aura from '@primevue/themes/aura';
 
-library.add(faBars, faYoutube, faDiscord, faRotateRight)
+library.add(faBars, faYoutube, faDiscord, faRotateRight, fas)
 
 const pinia = createPinia()
 const app = createApp(App)
