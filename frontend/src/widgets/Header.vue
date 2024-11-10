@@ -6,7 +6,9 @@ export default {
   setup() {
     const route = useRoute();
 
-    const isWikiRoute = computed(() => route.path === '/wiki');
+    const isWikiRoute = computed(() => route.path === '/wiki' ||
+        route.path.startsWith('/categories/') ||
+        route.path.startsWith('/articles/'));
 
     return {
       isWikiRoute
@@ -68,9 +70,6 @@ export default {
 
 }
 
-
-
-
 header {
   position:fixed;
   width: 100%;
@@ -98,7 +97,6 @@ header .logo span{
   cursor: pointer;
   visibility: hidden;
   opacity: 0;
-
 
 }
 header .logo-img {
