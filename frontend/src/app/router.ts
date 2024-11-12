@@ -4,30 +4,35 @@ import {createRouter, createWebHistory, RouteRecordRaw} from 'vue-router';
 import MainPage from "@/pages/main-page.vue";
 import BlogPage from "@/features/blog/blog.vue";
 import NewsPage from "@/features/news/news.vue";
-import WikiPage from "@/pages/wiki/ui.vue";
 import NotFound from "@/pages/404.vue";
 import RulesPage from "@/pages/rules-page.vue";
 import OtherPage from "@/pages/other/other-page.vue";
+import WikiLayout from "@/pages/wiki/wiki-layout.vue";
+import WikiPlaceholder from "@/widgets/wiki-placeholder/ui.vue";
+import WikiArticlePage from "@/widgets/wiki-content/ui.vue";
 
 const routes: Array<RouteRecordRaw> = [
     { path: '/', redirect: '/main' },
     { path: '/main', name: 'MainPage', component: MainPage },
-    { path: '/wiki', name: 'WikiPage', component: WikiPage },
     { path: '/blog', name: 'BlogPage', component: BlogPage },
     { path: '/news', name: 'NewsPage', component: NewsPage },
     { path: '/rules', name: 'RulesPage', component: RulesPage },
     { path: '/other', name: 'OtherPage', component: OtherPage },
     {
-        path: '/articles/:articleTitle',
-        name: 'Article',
-        component: WikiPage,
-        props: true
-    },
-    {
-        path: '/categories/:id',
-        name: 'Category',
-        component: WikiPage,
-        props: true
+        path: '/wiki',
+        component: WikiLayout,
+        children: [
+            {
+                path: '',
+                name: 'WikiHome',
+                component: WikiPlaceholder
+            },
+            {
+                path: '/articles/:articleTitle',
+                name: 'Article',
+                component: WikiArticlePage
+            }
+        ]
     },
     { path: '/:pathMatch(.*)*', name: 'NotFound', component: NotFound }
 ];

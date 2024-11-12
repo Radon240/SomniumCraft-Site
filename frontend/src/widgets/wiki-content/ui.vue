@@ -21,7 +21,6 @@ watch(
 
 <template>
   <div class="flex gap-2">
-    <ArticlesList/>
     <Article />
   </div>
 </template>
