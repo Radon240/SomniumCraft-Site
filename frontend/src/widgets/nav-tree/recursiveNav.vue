@@ -1,12 +1,10 @@
 <script setup lang="ts">
 import { type NavTreeNode } from "@/entities/NavTree/model/types.ts";
-import { useCategoryArticlesStore } from "@/entities/CategoryArticles";
 
-const props = defineProps<{
+defineProps<{
   node: NavTreeNode
 }>();
 
-const categoryArticlesStore = useCategoryArticlesStore();
 </script>
 
 <template>
@@ -15,24 +13,17 @@ const categoryArticlesStore = useCategoryArticlesStore();
       <router-link
           v-if="node.uri"
           :to="node.uri.toString()"
-          class="text-gray-400 hover:text-white transition-colors duration-200 text-sm"
-      >
+          class="text-gray-400 hover:text-white transition-colors duration-200 text-sm" >
         {{ node.label }}
       </router-link>
 
       <span
           v-else
-          class="text-white font-medium text-base"
+          class="text-white font-medium text-base underline"
       >
         {{ node.label }}
       </span>
 
-      <!--      <span
-          v-for="categoryArticles in categoryArticlesStore.loadCategoryArticles(node.label.toString())"
-          class="ml-2 text-gray-500 text-sm"
-      >
-        {{ categoryArticles.toString() }}
-      </span>-->
     </div>
 
     <ul
