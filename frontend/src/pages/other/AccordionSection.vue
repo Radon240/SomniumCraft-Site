@@ -1,16 +1,16 @@
 <template>
   <div :class="['bg-background-element', 'bg-opacity-80', 'p-5', 'w-full', 'itemAccordeon']">
     <button @click="toggleAccordion" class="w-full flex justify-between items-center py-5 text-slate-800">
-      <span class="text-xs md:text-base lg:text-lg xl:text-3xl text-nowrap text-white">{{ title }}</span>
+      <span class="text-2xl md:text-2xl lg:text-2xl xl:text-4xl text-nowrap text-white">{{ title }}</span>
       <span class="transition-transform duration-300 text-white">
         <!-- Иконка для аккордеона, вниз -->
-        <font-awesome-icon :icon="['fas', 'chevron-up']" v-if="!isOpen" class="text-xs md:text-base lg:text-lg xl:text-3xl text-white "/>
+        <font-awesome-icon :icon="['fas', 'chevron-down']" v-if="!isOpen" class="text-2xl md:text-2xl lg:text-2xl xl:text-4xl text-white "/>
         <!-- Иконка для аккордеона, вверх -->
-        <font-awesome-icon :icon="['fas', 'chevron-down']" v-else class="fa-solid fa-chevron-up text-xs md:text-base lg:text-lg xl:text-3xl text-white "/>
+        <font-awesome-icon :icon="['fas', 'chevron-up']" v-else class="fa-solid fa-chevron-up text-2xl md:text-2xl lg:text-2xl xl:text-4xl text-white "/>
       </span>
     </button>
-    <div :style="{ maxHeight: isOpen ? height + 'px' : '0' }" class="overflow-hidden transition-all duration-300 ease-in-out" :id="`content-${index}`">
-      <div class="p-5">
+    <div :style="{ maxHeight: isOpen ? height + 'px' : '0' }" class="overflow-hidden transition-all duration-300 ease-in-out " :id="`content-${index}`">
+      <div class="p-5 ">
         <slot></slot>
       </div>
     </div>
