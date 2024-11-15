@@ -8,6 +8,22 @@ module.exports = withMT({
       colors: {
         'pastel-blauw': '#699BF6',
         'background-element': '#1A1C25',
+        'backgroundMainPage':  {
+          40: '#737373',
+          50: '#f2f2f2',       // оттенок на 50%
+          200: '#b3b3b3',      // оттенок на 200%
+          300: '#808080',      // оттенок на 300%
+          400: '#4d4d4d',      // оттенок на 400%
+          500: '#262626',      // оттенок на 500%
+          600: '#1f1f1f',      // оттенок на 600%
+          700: '#191919',      // оттенок на 700%
+          800: '#0d0d0d',      // оттенок на 800%
+          900: '#040404',
+          100: '#040404',
+          },
+        'background': '#0E0F14',
+        'second-background': '#191C25',
+
       }
     },
     screens: {
@@ -26,6 +42,9 @@ module.exports = withMT({
       '2xl': '1536px',
       // => @media (min-width: 1536px) { ... }
     }
+  },
+  container: {
+    center: true,
   },
   variants: {
     extend: {},

@@ -9,7 +9,7 @@ const isMainRoute = computed(() => route.path === '/main');
 </script>
 
 <template>
-  <div id="app">
+  <div id="app" class="w-vdw">
     <div v-show="isMainRoute" class="background-image"></div>
     <Header />
     <main>
@@ -64,7 +64,7 @@ header {
 
 main {
   position: relative;
-  min-height: 100vh;
+  min-height: 100dvh;
 }
 
 footer {

@@ -28,7 +28,7 @@ onMounted(() => updateHeights());
 
 <template>
   <div class=" mt-20 p-10 w-full h-auto flex justify-center items-start w-full relative">
-    <div class="description container h-full pl-5 flex flex-col gap-5">
+    <div class="description container h-full p-5 flex flex-col gap-5">
       <AccordionItem
           :title="'Описание сервера'"
           :index="0"
@@ -36,7 +36,7 @@ onMounted(() => updateHeights());
           :isOpen="accordionOpen[0]"
           :updateHeights="updateHeights"
       >
-        <div class="text-sm md:text-lg lg:text-xl xl:text-2xl text-white font-light p-5">
+        <div class="text-sm md:text-lg lg:text-xl xl:text-2xl text-white font-light">
           Тут будет описание сервера когда-нибудь.
         </div>
       </AccordionItem>

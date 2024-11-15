@@ -1,13 +1,16 @@
 <template>
-  <main>
-    <div class="top-content">
+  <main class="w-full flex justify-start items-start flex-col flex-grow-1 absolute">
+    <div class="top-content w-full static flex flex-col justify-center items-center text-white/90 z-10 bg-backgroundMainPage-100/40 backdrop-blur-sm ">
       <span>SomniumCraft</span>
-      <div class="button-container">
-        <a href="https://discord.com/invite/CEDEQU6n6Y" id="start-play" target="_blank">Начать играть</a>
-        <button id="ip-server" @click="copyIP">ip:play.somnium-craft.su</button>
+      <div class="button-container flex justify-center items-center gap-8">
+        <a href="https://discord.com/invite/CEDEQU6n6Y" id="start-play" target="_blank"
+        class="non-italic border-0 inline-block cursor-pointer font-bold">Начать играть</a>
+        <button id="ip-server" @click="copyIP"
+                class="non-italicborder-0 inline-block cursor-pointer font-bold">
+          <p>IP : play.somnium-craft.su</p></button>
       </div>
     </div>
-    <div class="features-content">
+    <div class="features-content bg-background w-full min-h-screen flex justify-center gap-12">
       <News />
       <Blog/>
 
@@ -86,57 +89,22 @@ html {
   margin: 0;
 }
 
-
-
-main {
-  width: 100%;
-  display: flex;
-  align-content: flex-start;
-  justify-content: flex-start;
-  position: absolute;
-  flex-direction: column;
-  flex-grow: 1;
-}
-
-main .top-content {
-  position: static;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  color: rgba(255, 255, 255, 0.9);
+.top-content {
   font-size: calc(var(--font-size-button) * 4);
-  width: 100%;
-  z-index: 10;
-  min-height: 50vh;
-  background-color: rgba(4, 4, 4, 0.4);
-  backdrop-filter: blur(4px);
-
-
+  min-height: 60lvh;
 }
 
-main .top-content .button-container {
-  display: flex;
-  justify-content: center;
-  align-content: center;
-  gap: 2rem;
-}
-
-main .top-content .button-container button,
-main .top-content .button-container a {
-  font-style: normal;
-  text-decoration: none;
+.button-container button,
+.button-container a {
   font-size: calc(var(--font-size-button));
-  font-weight: 600;
   padding: calc(var(--font-size-button) * 0.7) calc(var(--font-size-button) * 1.5);
-  border: 0;
   border-radius: 30px;
-  display: inline-block;
   box-shadow: inset 0 -2px 15px -9px #2D2D2D;
-  cursor: pointer;
+  transition: 1s;
 }
 
-main .top-content .button-container button:hover {
+.button-container button:hover, .button-container a:hover {
+  filter: brightness(115%);
   -webkit-filter: brightness(115%);
   transition: all 1s ease;
 }
@@ -151,18 +119,11 @@ main .top-content .button-container button:hover {
   color: #fff;
 }
 
-main .features-content {
-  background-color: var(--background);
-
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  padding-right: 10rem;
+.features-content {
   padding-left: 10rem;
+  padding-right: 10rem;
   padding-bottom: 5%;
-  gap: 3rem;
 }
-
 .custom-toast {
   position: fixed;
   bottom: var(--font-size-button);
@@ -220,10 +181,20 @@ main .features-content {
 
 
 }
+@media (max-width: 1024px) {
+  .features-content{
+    flex-direction: column;
+    justify-content: start;
+    align-items: start;
+    width: 100vw;
+    padding: 0;
 
+  }
+
+}
 @media (max-width: 770px) {
   :root {
-    --font-size-button: 0.8rem;
+    --font-size-button: 0.9rem;
   }
   .custom-toast {
     font-size: 70%;
