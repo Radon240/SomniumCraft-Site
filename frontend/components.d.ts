@@ -10,5 +10,6 @@ declare module 'vue' {
     Card: typeof import('primevue/card')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    Tree: typeof import('primevue/tree')['default']
   }
 }

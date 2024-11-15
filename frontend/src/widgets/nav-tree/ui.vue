@@ -5,10 +5,11 @@ import TreeNav from "./recursiveNav.vue";
 const props = defineProps<{
   navTree: NavTree
 }>();
+
 </script>
 
 <template>
-  <nav class="m-4 w-fit">
+  <nav>
     <ul>
       <TreeNav
           v-for="node in navTree.rootNodes"
