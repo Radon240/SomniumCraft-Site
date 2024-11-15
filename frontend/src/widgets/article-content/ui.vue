@@ -1,30 +1,40 @@
 <script setup lang="ts">
 import { storeToRefs } from 'pinia'
 import { useArticleStore } from '@/entities/Article/ArticleStore.ts'
-import { marked } from 'marked'
-import { computed } from 'vue'
+import { MdCatalog, MdPreview } from "md-editor-v3"
+import "md-editor-v3/lib/style.css"
 
 const articleStore = useArticleStore()
 const { article, loading, error } = storeToRefs(articleStore)
 
-// Create a computed property for the rendered HTML
-const renderedContent = computed(() => {
-  if (article.value && article.value.content) {
-    return marked(article.value.content)
-  }
-  return ''
-})
 </script>
 
 <template>
   <div class="article">
-    <div v-if="loading">Loading...</div>
-    <div v-else-if="error">{{ error }}</div>
-    <article v-else-if="article">
-      <h1>{{ article.title }}</h1>
-      <div v-html="renderedContent"></div>
-    </article>
-  </div>
+
+  <div v-if="loading">Loading...</div>
+  <div v-else-if="error">{{ error }}</div>
+    <Card v-else-if="article">
+      <template #title>
+        <h1>{{ article.title }}</h1>
+      </template>
+      <template #content>
+        <div class="flex justify-center">
+          <MdPreview
+              v-model="article.content"
+              :id="article.id"
+              theme="dark"
+              previewTheme="default"
+          />
+          <MdCatalog
+              :editor="article.id"
+              v-model="article.content"
+              scrollElement="scrollElement"
+          />
+        </div>
+      </template>
+    </Card>
+</div>
 </template>
 
 <style scoped>
@@ -39,7 +49,6 @@ h1 {
   margin-bottom: 20px;
 }
 
-/* Add some basic styling for Markdown content */
 :deep(h2) {
   font-size: 1.8em;
   margin-top: 30px;
