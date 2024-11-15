@@ -3,7 +3,6 @@ import { watch } from 'vue'
 import { useRoute } from 'vue-router'
 import { useArticleStore } from '@/entities/Article/ArticleStore.ts'
 import Article from "@/widgets/article-content/ui.vue";
-import ArticlesList from "@/widgets/article-by-category-list/ui.vue";
 
 const route = useRoute()
 const articleStore = useArticleStore()
@@ -20,7 +19,5 @@ watch(
 </script>
 
 <template>
-  <div class="flex gap-2">
     <Article />
-  </div>
 </template>
