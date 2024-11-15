@@ -42,9 +42,10 @@ onMounted(async () => {
 
 <template>
 
-  <div v-for="newsItem in news" :key="newsItem.id" class="news-item" :style="{ backgroundImage: `url(${newsItem.img[0]})` }">
-              <div class="text">
-                <div class="title">{{ newsItem.title }}</div>
+  <div v-for="newsItem in news" :key="newsItem.id" class="news-item flex items-center justify-end flex-col gap-[1vw] rounded-[30px] bg-no-repeat bg-top bg-cover" :style="{ backgroundImage: `url(${newsItem.img[0]})` }">
+
+              <div class="text bg-background-element/80 backdrop-blur-[5px]">
+                <div class="title text-xl sm:text-base md:text-lg lg:text-xl xl:text-2xl ">{{ newsItem.title }}</div>
 
                 <div class="description">
                   <p>{{ newsItem.description }}</p>
@@ -54,7 +55,7 @@ onMounted(async () => {
                   <span class="time">{{ newsItem.time }}</span>
                 </div>
               </div>
-            </div>
+  </div>
 
 </template>
 
@@ -72,24 +73,17 @@ onMounted(async () => {
   list-style: none;
   text-transform: capitalize;
 }
- .news-item{
-   display: flex;
-   align-items: center;
-   justify-content: end;
-   flex-direction: column;
-   width: 100%;
-   gap: 1vw;
-   border-radius: 30px;
-   background-repeat: no-repeat;
-   background-position: top;
-   background-size: 100% auto;
-   height: 50vh;
-   padding-top: 5rem;
- }
+
+.news-item{
+  width: 100%;
+  height: 50vh;
+  padding-top: 5rem;
+  background-size: cover;
+
+}
+
 .text {
-  background-color: rgba(25, 28, 37, 0.80);
-  backdrop-filter: blur(5px);
-  margin-top: 20%;
+  margin-top: 10rem;
   border-radius: 30px;
   display: grid;
   grid-template-areas:
@@ -109,7 +103,7 @@ onMounted(async () => {
 
 .title {
   grid-area: A;
-  font-size: 110%;
+
   color: rgba(255, 255, 255, 0.8);
   border-bottom: 0.1rem solid rgba(107, 128, 182, 0.12);
   margin-bottom: 1vw;
@@ -119,12 +113,7 @@ onMounted(async () => {
   grid-area: B;
   font-weight: lighter;
   color: rgba(255, 255, 255, 0.5);
-  max-height: 15rem; /* Ограничиваем высоту для description */
-  overflow: hidden; /* Скрываем переполнение */
-  display: -webkit-box;
-  -webkit-line-clamp: 4; /* Ограничение в 4 строки */
-  -webkit-box-orient: vertical;
-  text-overflow: ellipsis; /* Добавление многоточия */
+
 }
 
 
@@ -135,5 +124,28 @@ onMounted(async () => {
   justify-content: space-between;
   align-items: center;
   color: rgba(255, 255, 255, 0.3);
+}
+@media (max-width: 1024px) {
+  .news-item{
+
+    flex: 0 0 auto;
+    width: 90%;
+    height: 100%;
+    background-size: cover;
+  }
+  .text{
+    width: 100%;
+    height: 90%;
+
+  }
+  .description{
+    display: -webkit-box;
+    text-wrap: wrap;
+    height: auto;
+    overflow: hidden; /* Скрываем переполнение */
+    -webkit-line-clamp: 4; /* Ограничение в 4 строки */
+    -webkit-box-orient: vertical;
+    text-overflow: ellipsis; /* Добавление многоточия */
+  }
 }
 </style>

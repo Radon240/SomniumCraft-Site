@@ -1,27 +1,13 @@
 <template>
-  <div class="newsSection">
-    <div class="newsBar">
-      <font-awesome-icon :icon="['fas', 'rotate-right']" />
+  <div class="newsSection flex flex-col items-end">
+    <div class="newsBar text-white flex items-center bg-second-background text-[1.5rem]
+     rounded-[30px] gap-4">
+      <font-awesome-icon :icon="['fas', 'rotate-right']"  />
 
       <span>Новости</span>
     </div>
-    <div class="news">
-
+    <div class="news rounded-[30px] flex flex-col gap-[2vw] max-h-[90vh] overflow-y-auto">
             <NewsItem/>
-
-<!--      <div v-for="newsItem in news" :key="newsItem.id" class="news-item">-->
-<!--        <img v-if="newsItem.img" :src="newsItem.img[0]" alt="" class="news-image no-select"  />-->
-<!--        <div class="text">-->
-<!--          <div class="title">{{ newsItem.title }}</div>-->
-<!--          <div class="description">-->
-<!--            <p>{{ newsItem.description }}</p>-->
-<!--          </div>-->
-<!--          <div class="date_and_time">-->
-<!--            <span class="date">{{ newsItem.date }}</span>-->
-<!--            <span class="time">{{ newsItem.time }}</span>-->
-<!--          </div>-->
-<!--        </div>-->
-<!--      </div>-->
     </div>
   </div>
 </template>
@@ -56,39 +42,54 @@ export default defineComponent({
 }
 
 .newsSection {
+  padding: 2rem 1rem;
   //width: 60%;
   width: 60rem;
-  display: flex;
-  flex-direction: column;
-  padding: 2rem 1rem;
-  align-items: end;
 
 }
 
 .newsBar {
-  color: white;
-  display: flex;
-  align-items: center;
-  background-color: rgba(var(--second-background-color),1);
   width: 100%;
   margin-bottom: 2rem;
   font-size: 1.5rem;
-  border-radius: 30px;
   padding: 0.5rem 1rem;
-  gap: 1rem;
+
 }
 
 .news {
   width: 100%;
   padding-right: 1rem;
-  border-radius: 30px;
-  display: flex;
-  flex-direction: column;
-  gap: 2vw;
-  max-height: 60vw; /* Устанавливаем максимальную высоту */
-  overflow-y: auto; /* Добавляем прокрутку */
+}
+@media (max-width: 1024px) {
+    .newsSection {
+      padding-top: 2rem;
+      padding-bottom: 2rem;
+      flex-wrap: wrap;
+      align-items: start;
+      width: 100%;
+    }
 
+  .newsBar {
+    width: 100%;
+    margin-bottom: 2rem;
+    font-size: 1.5rem;
+    padding: 0.5rem 1rem;
+
+  }
+  .news{
+    display: flex;
+    padding-top: 0;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: start;
+    justify-content: space-between;
+    height: 50vh;
+    width: 100vw;
+    gap: 1rem;
+    overflow: auto;
+    padding-right: 1.5rem;
+    padding-bottom: 1.5rem;
+  }
 
 }
-
 </style>

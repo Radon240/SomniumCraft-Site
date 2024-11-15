@@ -27,8 +27,8 @@ onMounted(() => updateHeights());
 </script>
 
 <template>
-  <div class="container mt-20 p-10 h-auto flex justify-center items-start w-full relative">
-    <div class="description w-full h-full p-5 flex flex-col gap-5">
+  <div class=" mt-20 p-10 w-full h-auto flex justify-center items-start w-full relative">
+    <div class="description container h-full p-5 flex flex-col gap-5">
       <AccordionItem
           :title="'Описание сервера'"
           :index="0"
@@ -36,7 +36,7 @@ onMounted(() => updateHeights());
           :isOpen="accordionOpen[0]"
           :updateHeights="updateHeights"
       >
-        <div class="text-xs md:text-base lg:text-lg xl:text-xl text-white font-light p-5">
+        <div class="text-sm md:text-lg lg:text-xl xl:text-2xl text-white font-light">
           Тут будет описание сервера когда-нибудь.
         </div>
       </AccordionItem>
@@ -63,10 +63,10 @@ onMounted(() => updateHeights());
           :isOpen="accordionOpen[2]"
           :updateHeights="updateHeights"
       >
-        <p class="text-xs md:text-base lg:text-lg xl:text-xl text-white font-light ">Телефон: +7 (123) 456-78-90</p>
-        <p class="text-xs md:text-base lg:text-lg xl:text-xl text-white font-light ">Email: support@server.ru</p>
-        <p class="text-xs md:text-base lg:text-lg xl:text-xl text-white font-light ">Адрес: Москва, ул. Примерная, д. 10</p>
-        <p class="text-xs md:text-base lg:text-lg xl:text-xl text-white font-light ">Часы работы: Пн-Пт 10:00 - 19:00</p>
+        <p class="text-sm md:text-lg lg:text-xl xl:text-2xl text-white font-light w-full ">Телефон: +7 (123) 456-78-90</p>
+        <p class="text-sm md:text-lg lg:text-xl xl:text-2xl text-white font-light ">Email: support@server.ru</p>
+        <p class="text-sm md:text-lg lg:text-xl xl:text-2xl text-white font-light ">Адрес: Москва, ул. Примерная, д. 10</p>
+        <p class="text-sm md:text-lg lg:text-xl xl:text-2xl text-white font-light ">Часы работы: Пн-Пт 10:00 - 19:00</p>
       </AccordionItem>
 
     </div>

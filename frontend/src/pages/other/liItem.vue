@@ -6,7 +6,7 @@ defineProps({
 </script>
 
 <template>
-  <li class="text-xs md:text-base lg:text-lg xl:text-xl text-white font-light mb-2">
+  <li class="text-sm md:text-lg lg:text-xl xl:text-2xl text-white font-light mb-2">
     {{ text }}
   </li>
 </template>
