@@ -2,61 +2,68 @@
 import { ref } from 'vue';
 import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/vue'
 import { ChevronDownIcon } from '@heroicons/vue/20/solid'
-const submenuExpanded = ref(true); // Контролирует состояние меню
 
-// Методы
-const goToUsers = () => {
-  // Логика для перехода на страницу пользователей
+
+// Состояние для управления раскрытием подменю
+const submenuExpanded = ref(true);
+
+// Функция для плавной прокрутки к разделу с учётом отступа
+const goToSection = (sectionId: string) => {
+  const targetElement = document.getElementById(sectionId);
+  if (targetElement) {
+    window.scrollTo({
+      top: targetElement.offsetTop - 300, // 300px — это отступ для фиксированного меню
+      behavior: 'smooth', // Плавная прокрутка
+    });
+  }
 };
 
+// Функция для переключения подменю
 const toggleSubmenu = () => {
   submenuExpanded.value = !submenuExpanded.value;
-};
-
-const goToRoles = () => {
-  // Логика для перехода на страницу ролей
-};
-
-const goToRolesList = () => {
-  // Логика для перехода на список ролей
 };
 </script>
 
 <template>
 
   <aside class="navigation fixed mt-28 ml-10 w-auto max-w-64 h-full">
-
-  <Menu as="div" class="inline-block text-left w-full h-auto">
-    <div class="w-full">
-      <MenuButton class="md:text-base lg:text-lg xl:text-xl text-nowrap inline-flex w-full justify-start gap-x-1.5 rounded-md transition-colors duration-300 ease-in-out px-3 py-2 text-sm font-bold text-white-900 shadow-sm ring-inset  hover:bg-pastel-blauw">
+  <div class="cont">
+    <Menu as="div" class="menuFix inline-block text-left w-full h-auto">
+      <div class="w-full">
+        <MenuButton class="md:text-base lg:text-lg xl:text-xl text-nowrap inline-flex w-full justify-start gap-x-1.5 rounded-md transition-colors duration-300 ease-in-out px-3 py-2 text-sm font-bold text-white-900 shadow-sm ring-inset  hover:bg-pastel-blauw">
           <span class="text-xs md:text-base lg:text-lg xl:text-xl text-nowrap ">
 
             <font-awesome-icon :icon="['fass', 'lines-leaning']" />
             На этой странице
            <font-awesome-icon :icon="['fas', 'chevron-down']" class="text-gray-400 text-xs md:text-base lg:text-lg xl:text-xl text-nowrap"/></span>
-      </MenuButton>
-    </div>
+        </MenuButton>
+      </div>
 
-    <transition enter-active-class="w-full transition ease-out duration-100" enter-from-class="transform opacity-0 scale-95" enter-to-class="transform opacity-100 scale-100" leave-active-class="transition ease-in duration-75" leave-from-class="transform opacity-100 scale-100" leave-to-class="transform opacity-0 scale-95">
-      <MenuItems class="w-full z-10 mt-2 origin-top-left rounded-md  focus:outline-none">
-        <div class="py-1 ">
-          <MenuItem v-slot="{ active }">
-            <a href="#Общие правила" :class="[active ? 'text-pastel-blauw outline-none' : 'text-white-900', 'block px-4 py-2 text-sm']" class="md:text-base lg:text-lg xl:text-xl ">
-              Общие правила</a>
-          </MenuItem>
-          <MenuItem v-slot="{ active }">
-            <a href="#Правила общения" :class="[active ? 'text-pastel-blauw outline-none' : 'text-white-900', 'block px-4 py-2 text-sm']" class="md:text-base lg:text-lg xl:text-xl ">
-              Правила общения</a>
-          </MenuItem>
-          <MenuItem v-slot="{ active }">
-            <a href="#Правила игры на сервере" :class="[active ? 'text-pastel-blauw outline-none' : 'text-white-900', 'block px-4 py-2 text-sm']" class="md:text-base lg:text-lg xl:text-xl ">
-              Правила игры на сервере</a>
-          </MenuItem>
+      <transition enter-active-class="w-full transition ease-out duration-100" enter-from-class="transform opacity-0 scale-95" enter-to-class="transform opacity-100 scale-100" leave-active-class="transition ease-in duration-75" leave-from-class="transform opacity-100 scale-100" leave-to-class="transform opacity-0 scale-95">
+        <MenuItems class="w-full z-10 mt-2 origin-top-left rounded-md  focus:outline-none ">
+          <div class="py-1 ">
+            <MenuItem v-slot="{ active }" class="cursor-pointer">
+              <a @click.prevent="goToSection('Общие правила')" :class="[active ? 'text-pastel-blauw outline-none' : 'text-white-900', 'block px-4 py-2 text-sm']" class="md:text-base lg:text-lg xl:text-xl">
+                Общие правила
+              </a>
+            </MenuItem>
+            <MenuItem v-slot="{ active }" class="cursor-pointer">
+              <a @click.prevent="goToSection('Правила общения')" :class="[active ? 'text-pastel-blauw outline-none' : 'text-white-900', 'block px-4 py-2 text-sm']" class="md:text-base lg:text-lg xl:text-xl">
+                Правила общения
+              </a>
+            </MenuItem >
+            <MenuItem v-slot="{ active }" class="cursor-pointer">
+              <a @click.prevent="goToSection('Правила игры на сервере')" :class="[active ? 'text-pastel-blauw outline-none' : 'text-white-900', 'block px-4 py-2 text-sm']" class="md:text-base lg:text-lg xl:text-xl">
+                Правила игры на сервере
+              </a>
+            </MenuItem>
 
-        </div>
-      </MenuItems>
-    </transition>
-  </Menu>
+          </div>
+        </MenuItems>
+      </transition>
+    </Menu>
+  </div>
+
 </aside>
   <div class="containerRules mr-64 pl-10">
 
@@ -201,20 +208,54 @@ const goToRolesList = () => {
   color: rgba(255, 255, 255, 0.70);
 }
 @media (max-width: 1280px) {
-  aside{
-    display:none;
-    visibility: hidden;
+  aside {
+    width: 100vw;
+    max-width: 100vw;/* Меню занимает всю ширину */
+    position: fixed; /* Меню не фиксируется */
+    margin-left: 0; /* Убираем левый отступ */
+    max-height: 10rem;
+    margin-top: 5rem;
+    z-index: 999;
+  }
+
+  .navigation {
+
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+
+
+  }
+  .cont{
+    width: 100%;
+
+  }
+  .menuFix{
+    width: 100vw;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    padding-left: 5rem;
+    padding-right: 5rem;
+    border-color: hsla(240,5%,84%,.1);
+    border-width: 1px;
+    background-color: rgba(24, 21, 30, 0.5);
+    backdrop-filter: blur(5px);
+    border-radius: 0.625rem;
 
   }
   .containerRules {
-    justify-content: space-between;
-    width: 100%;
-    margin-left: 0;
-    padding-left: 0;
+    margin-left: 0; /* Убираем отступ */
+    padding: 1rem; /* Внутренние отступы для удобства */
   }
+
   .content {
-    width: 100%;
-    margin-left: 1rem;
+    margin-top: 14rem;
+    width: 100%; /* Контент растягивается */
+    margin-left: 0; /* Убираем фиксированный отступ */
+
   }
+
 }
 </style>

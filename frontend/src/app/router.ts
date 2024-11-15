@@ -50,6 +50,15 @@ const currentView = computed((): typeof NotFound => {
 const router = createRouter({
     history: createWebHistory(),
     routes,
+    scrollBehavior(to, from, savedPosition) {
+        if (savedPosition) {
+            // Вернуться к сохранённой позиции (например, при нажатии "назад")
+            return savedPosition;
+        } else {
+            // Перейти к началу страницы
+            return { top: 0, left: 0 };
+        }
+    },
 });
 
 export default router;

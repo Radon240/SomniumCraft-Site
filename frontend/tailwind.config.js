@@ -23,6 +23,7 @@ module.exports = withMT({
           },
         'background': '#0E0F14',
         'second-background': '#191C25',
+        'backgroundHeader': '#0e0f14',
 
       }
     },

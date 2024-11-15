@@ -2,7 +2,9 @@
 import { computed } from 'vue';
 import { useRoute } from 'vue-router';
 
+
 export default {
+
   setup() {
     const route = useRoute();
 
@@ -18,11 +20,11 @@ export default {
 </script>
 
 <template>
-  <header class = "no-select" >
-    <a href="/main" class="logo">
-      <div class="logo-img">
-        <img v-if="isWikiRoute" src="@/resources/images/CatHead24_nerd.svg" draggable="false"/>
-        <img v-else src="@/resources/images/CatHead24.svg" draggable="false"/>
+  <header class ="no-select fixed w-full h-20 top-0 left-0 bg-backgroundHeader/80 flex justify-between items-center z-[100] backdrop-blur-sm gap-[10%]">
+    <a href="/main" class="logo text-white ">
+      <div class="logo-img w-20 h-20 rounded-[2rem]">
+        <img v-if="isWikiRoute" src="../../resources/images/CatHead24_nerd.svg" draggable="false"/>
+        <img v-else src="../../resources/images/CatHead24.svg" draggable="false"/>
       </div>
     </a>
 
@@ -31,7 +33,7 @@ export default {
       <font-awesome-icon :icon="['fas', 'bars']" />
     </label>
 
-    <nav class="navbar">
+    <nav class="navbar flex gap-8">
 
       <router-link to="/main">Главная</router-link>
       <router-link to="/wiki">Вики</router-link>
@@ -43,7 +45,7 @@ export default {
 
     <div class="containerInfo">
       <div class="avatar">
-        <img src="@/resources/images/steve.png" draggable="false"/>
+        <img src="../../resources/images/steve.png" draggable="false"/>
       </div>
       <div class="info">
         <span>Приветствуем, Незнакомец</span>
@@ -53,6 +55,7 @@ export default {
       </div>
     </div>
   </header>
+
 </template>
 
 <style>
@@ -71,51 +74,38 @@ export default {
 }
 
 header {
-  position:fixed;
-  width: 100%;
-  height: 5rem;
-  top: 0;
-  left: 0;
-  background: rgba(var(--background-header));
+
   box-shadow: var(--box-shadow);
   padding: 2rem 8%;
-  display: flex;
-  justify-content: center;
-
-  align-items: center;
-  z-index: 100;
   border-bottom: var(--border-header); /* Параметры линии внизу */
-  backdrop-filter: blur(3px);
-  gap: 10%;
-}
-header .logo {
-  font-size: 2rem;
-  color: var(--white);
-  transition: 0.5s;
-}
-header .logo span{
-  color: var(--white);
-  cursor: pointer;
-  visibility: hidden;
-  opacity: 0;
 
 }
-header .logo-img {
+.logo {
+  font-size: 2rem;
+  transition: all 1s ease;
+}
+
+.logo-img {
   width: 5rem;
   height: 5rem;
   border-radius: 2rem;
+  transition: all 1s ease;
 
 }
-header .logo-img img{
+.logo-img img{
   -webkit-filter: brightness(100%);
   width: 100%;
   height: auto;
   padding: 0.5rem;
-  transition: transform 0.5s ease; /* Плавная анимация */ /* Анимация для изменения размера */
+  -webkit-transition: all 1s ease;
+  -moz-transition: all 1s ease;
+  -o-transition: all 1s ease;
+  -ms-transition: all 1s ease;
+  transition: all 1s ease;
 
 
 }
-header .logo-img:hover img {
+.logo-img:hover img {
   -webkit-filter: brightness(70%);
   -webkit-transition: all 1s ease;
   -moz-transition: all 1s ease;
@@ -123,20 +113,17 @@ header .logo-img:hover img {
   -ms-transition: all 1s ease;
   transition: all 1s ease;
 }
-header .navbar{
-  display: flex;
-  gap: 2rem;
-}
-header .navbar a{
+.navbar a{
   margin-right: auto;
   font-size: 1.5rem;
   color: var(--white);
-  transition: 0.5s;
+  transition: all 0.5s ease;
 
 }
 
-header .navbar a:hover{
+.navbar a:hover{
   color: var(--pastel-blauw);
+  transition: all 0.5s ease;
 }
 
 header input{
@@ -151,7 +138,7 @@ header label {
   display: none;
 }
 
-header .containerInfo {
+.containerInfo {
   display: flex;
   align-items: center;
   gap: 1rem;
@@ -161,20 +148,20 @@ img, video {
   max-width: none;
   height: auto;
 }
-header .avatar img {
+.avatar img {
   width: 3.5rem;
   height: 3.5rem;
   border-radius: 20%;
   border: var(--border-header);
 }
-header .info{
+.info{
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-content: center;
   gap:0.5rem
 }
-header .info span {
+.info span {
   white-space: nowrap;
   font-size: 1rem;
   color: white;
@@ -182,13 +169,13 @@ header .info span {
 
 }
 
-header .info .buttons {
+.info .buttons {
   display: flex;
 
 
 }
 
-header .info .buttons button {
+.info .buttons button {
   padding: 0.5rem 0.1%;
   border: 1px solid rgba(255,255,255, 0.1);
   background: transparent;
@@ -200,7 +187,7 @@ header .info .buttons button {
   width: 100%;
 }
 
-header .buttons button:hover {
+.buttons button:hover {
   background-color: var(--pastel-blauw);
   transition: all 1s ease;
 
@@ -274,6 +261,9 @@ header .buttons button:hover {
 @media (max-width: 450px) {
   html {
     font-size: 50%;
+  }
+  header{
+    padding: 1rem 1%;
   }
 }
 
