@@ -12,7 +12,7 @@ const toggleSidebar = () => {
 </script>
 
 <template>
-  <div class="flex relative min-h-screen pt-24">
+  <div class="flex relative min-h-screen pt-24 mb-5">
     <button
         @click="toggleSidebar"
         class="fixed bottom-4 right-4 z-50 p-3 rounded-full text-white shadow-lg hover:bg-gray-700 transition-colors duration-200 md:hidden"
@@ -23,12 +23,11 @@ const toggleSidebar = () => {
 
     <aside
         :class="[
-        'fixed inset-y-0 left-0 transform md:relative md:translate-x-0 transition duration-200 ease-in-out z-30',
-        isSidebarOpen ? 'translate-x-0' : '-translate-x-full'
+        'w-64 mb-5 left-2 transform md:relative md:translate-x-0 transition duration-400 ease-in-out z-30',
+        isSidebarOpen ? 'translate-x-0' : '-translate-x-full fixed'
       ]"
-        class="w-64 shadow-2xl shadow-black md:shadow-none"
     >
-      <div class="h-full overflow-y-auto rounded-2xl ml-5">
+      <div class="h-fit text-xl overflow-y-auto rounded-2xl ml-5 p-4 md:p-0">
         <ArticlesList />
       </div>
     </aside>
@@ -52,5 +51,5 @@ const toggleSidebar = () => {
 </template>
 
 <style scoped>
-/* Дополнительные стили, если необходимо */
+
 </style>

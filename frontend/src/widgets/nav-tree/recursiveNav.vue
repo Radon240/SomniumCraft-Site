@@ -62,13 +62,13 @@ onMounted(() => {
       <router-link
           v-if="slotProps.node.data && slotProps.node.data.uri"
           :to="slotProps.node.data.uri"
-          class="text-gray-400 hover:text-white transition-colors duration-200 no-underline hover:underline"
+          class="text-gray-400 hover:text-white transition-colors duration-200 no-underline"
       >
         {{ slotProps.node.label }}
       </router-link>
       <span
           v-else
-          :class="{ 'font-medium underline': !slotProps.node.data || !slotProps.node.data.uri }"
+          :class="{ 'font-bold': !slotProps.node.data || !slotProps.node.data.uri }"
       >
         {{ slotProps.node.label }}
       </span>
