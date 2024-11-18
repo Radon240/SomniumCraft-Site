@@ -45,12 +45,14 @@ export default {
 
     <div class="containerInfo">
       <div class="avatar">
-        <img src="../../resources/images/steve.png" draggable="false"/>
+<!--        <img src="../../resources/images/steve.png" draggable="false"/>-->
+        <img  :src="`https://mineskin.eu/helm/Radon24`" alt="Skin"  draggable="false"/>
       </div>
       <div class="info">
         <span>Приветствуем, Незнакомец</span>
         <div class="buttons">
-          <button>Личный кабинет</button>
+          <a href="/account" target="_blank" class="w-full"><button>Личный кабинет</button> </a>
+
         </div>
       </div>
     </div>
@@ -58,7 +60,7 @@ export default {
 
 </template>
 
-<style>
+<style scoped>
 
 * {
   box-sizing: border-box;

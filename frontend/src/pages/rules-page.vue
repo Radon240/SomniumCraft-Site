@@ -215,7 +215,7 @@ const toggleSubmenu = () => {
     margin-left: 0; /* Убираем левый отступ */
     max-height: 10rem;
     margin-top: 5rem;
-    z-index: 999;
+    z-index: 10;
   }
 
   .navigation {
@@ -234,10 +234,7 @@ const toggleSubmenu = () => {
   }
   .menuFix{
     width: 100vw;
-    padding-top: 1rem;
-    padding-bottom: 1rem;
-    padding-left: 5rem;
-    padding-right: 5rem;
+    padding: 1rem 5rem;
     border-color: hsla(240,5%,84%,.1);
     border-width: 1px;
     background-color: rgba(24, 21, 30, 0.5);

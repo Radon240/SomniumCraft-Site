@@ -10,6 +10,7 @@ import OtherPage from "@/pages/other/other-page.vue";
 import WikiLayout from "@/pages/wiki/wiki-layout.vue";
 import WikiPlaceholder from "@/widgets/wiki-placeholder/ui.vue";
 import WikiArticlePage from "@/widgets/wiki-content/ui.vue";
+import PersonalAccountPage from "@/pages/personalAccount-page.vue";
 
 const routes: Array<RouteRecordRaw> = [
     { path: '/', redirect: '/main' },
@@ -18,6 +19,7 @@ const routes: Array<RouteRecordRaw> = [
     { path: '/news', name: 'NewsPage', component: NewsPage },
     { path: '/rules', name: 'RulesPage', component: RulesPage },
     { path: '/other', name: 'OtherPage', component: OtherPage },
+    { path: '/account', name: 'PersonalAccountPage', component: PersonalAccountPage },
     {
         path: '/wiki',
         component: WikiLayout,
