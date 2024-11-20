@@ -20,14 +20,20 @@ watch(
 </script>
 
 <template>
-  <div class="flex gap-5">
+  <div class="flex flex-col md:flex-row gap-8">
     <ArticleInfo
+        class="w-fit order-1"
         :contributors="articleStore.article?.contributors"
         :lastEditDate="articleStore.article?.submittedTimestamp"
     />
-    <Article />
+    <Article class="w-full min-w-3/4 order-2" />
   </div>
 </template>
 
 <style scoped>
+@media (max-width: 768px) {
+  .flex-col > * {
+    width: 100%;
+  }
+}
 </style>

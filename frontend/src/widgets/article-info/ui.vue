@@ -25,14 +25,14 @@ const getAvatarUrl = (size: number, nickname: string) => `https://vzge.me/face/$
 </script>
 
 <template>
-  <div class="bg-gray-900 border border-blue-500 rounded-lg p-6 w-full max-w-md max-h-fit">
+  <div class="bg-gray-900 border border-blue-500 rounded-lg p-6 w-fit max-w-md max-h-fit">
     <div class="mb-6">
       <h2 class="text-white text-2xl font-bold mb-2">Дата создания</h2>
       <p class="text-gray-300 text-xl">{{ formattedDate }}</p>
     </div>
 
     <div class="mb-8">
-      <h2 class="text-white text-2xl font-bold mb-4">Contributors</h2>
+      <h2 class="text-white text-2xl font-bold mb-4">Контрибьюторы</h2>
       <div class="flex flex-wrap gap-2">
         <div v-for="contributor in contributors" :key="contributor.id"
              class="w-12 h-12 rounded overflow-hidden">

@@ -12,44 +12,42 @@ const toggleSidebar = () => {
 </script>
 
 <template>
-  <div class="flex relative min-h-screen pt-24 mb-5">
+  <div class="flex flex-col md:flex-row py-24 w-screen min-h-screen">
     <button
         @click="toggleSidebar"
-        class="fixed bottom-4 right-4 z-50 p-3 rounded-full text-white shadow-lg hover:bg-gray-700 transition-colors duration-200 md:hidden"
+        class="md:hidden fixed bottom-4 right-4 z-50 bg-gray-800 text-white p-2 rounded-md shadow-lg transition-colors duration-200 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-600 focus:ring-opacity-50"
+        aria-label="Toggle sidebar"
     >
-      <Bars3Icon v-if="!isSidebarOpen" class="h-6 w-6" />
-      <XMarkIcon v-else class="h-6 w-6" />
+      <Bars3Icon v-if="!isSidebarOpen" class="w-6 h-6" />
+      <XMarkIcon v-else class="w-6 h-6" />
     </button>
 
-    <aside
-        :class="[
-        'w-64 mb-5 left-2 transform md:relative md:translate-x-0 transition duration-400 ease-in-out z-30',
-        isSidebarOpen ? 'translate-x-0' : '-translate-x-full fixed'
-      ]"
-    >
-      <div class="h-fit text-xl overflow-y-auto rounded-2xl ml-5 p-4 md:p-0">
+    <aside :class="[
+      'bg-gray-900 h-full rounded-xl w-64 overflow-y-auto transition-all duration-300 ease-in-out text-white',
+      'fixed transform md:relative md:translate-x-0 z-40',
+      isSidebarOpen ? 'translate-x-0' : '-translate-x-full'
+        ]">
+      <div class="text-xl">
         <ArticlesList />
       </div>
     </aside>
 
-    <main
-        :class="[
-        'transition-all duration-200 ease-in-out',
-        isSidebarOpen ? 'md:ml-64' : ''
-      ]"
-        class="flex-1 min-h-screen px-4 md:px-8"
-    >
+    <div class="flex-grow md:w-1/2 px-4 md:px-8 overflow-y-auto">
       <RouterView />
-    </main>
+    </div>
 
     <div
         v-if="isSidebarOpen"
         @click="toggleSidebar"
         class="fixed inset-0 bg-black bg-opacity-50 z-20 md:hidden"
     ></div>
+
   </div>
 </template>
 
 <style scoped>
-
+aside {
+  max-height: calc(100vh - 96px);
+  overflow-y: auto;
+}
 </style>

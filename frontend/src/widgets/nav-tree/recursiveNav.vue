@@ -44,56 +44,71 @@ onMounted(() => {
 </script>
 
 <template>
-  <Tree
-      :value="treeData"
-      :expandedKeys="expandedKeys"
-      selectionMode="single"
-      @node-select="onNodeSelect"
-      class="nav-tree bg-gray-900 text-gray-300 p-4"
-      :pt="{
-      root: { class: 'bg-transparent' },
-      content: { class: 'hover:bg-gray-800 transition-colors duration-200 rounded' },
-      node: { class: 'my-1' },
-      label: { class: 'text-sm' },
-      toggler: { class: 'w-6 h-6 text-gray-400 hover:text-white transition-colors duration-200' },
-    }"
-  >
-    <template #default="slotProps">
-      <router-link
-          v-if="slotProps.node.data && slotProps.node.data.uri"
-          :to="slotProps.node.data.uri"
-          class="text-gray-400 hover:text-white transition-colors duration-200 no-underline"
-      >
-        {{ slotProps.node.label }}
-      </router-link>
-      <span
-          v-else
-          :class="{ 'font-bold': !slotProps.node.data || !slotProps.node.data.uri }"
-      >
-        {{ slotProps.node.label }}
-      </span>
-    </template>
-  </Tree>
+  <div class="nav-tree-container bg-gray-900">
+    <Tree
+        :value="treeData"
+        :expandedKeys="expandedKeys"
+        selectionMode="single"
+        @node-select="onNodeSelect"
+        class="nav-tree text-gray-300"
+        :pt="{
+        root: { class: 'bg-transparent' },
+        content: { class: 'hover:bg-gray-700 transition-colors duration-200 rounded' },
+        node: { class: 'my-1' },
+        label: { class: 'text-sm' },
+        toggler: { class: 'w-6 h-6 text-gray-400 hover:text-white transition-colors duration-200' },
+      }"
+    >
+      <template #default="slotProps">
+        <router-link
+            v-if="slotProps.node.data && slotProps.node.data.uri"
+            :to="slotProps.node.data.uri"
+            class="text-gray-300 hover:text-white transition-colors duration-200 no-underline"
+        >
+          {{ slotProps.node.label }}
+        </router-link>
+        <span
+            v-else
+            :class="{ 'font-bold text-gray-100': !slotProps.node.data || !slotProps.node.data.uri }"
+        >
+          {{ slotProps.node.label }}
+        </span>
+      </template>
+    </Tree>
+  </div>
 </template>
 
-<style>
-.nav-tree .p-tree {
-  @apply border-none bg-transparent;
+<style scoped>
+.nav-tree-container {
+  max-height: calc(100vh - 2rem);
+  overflow-y: auto;
 }
 
-.nav-tree .p-treenode-content {
-  @apply p-2;
+:deep(.p-tree) {
+  border: none;
+  background: transparent;
+  padding: 0;
 }
 
-.nav-tree .p-treenode-leaf > .p-treenode-content .p-tree-toggler {
-  @apply invisible;
+:deep(.p-treenode-content) {
+  padding: 0.5rem;
+  border-radius: 0.25rem;
 }
 
-.nav-tree .p-treenode-content:focus {
-  @apply shadow-none;
+:deep(.p-treenode-leaf > .p-treenode-content .p-tree-toggler) {
+  visibility: hidden;
 }
 
-.nav-tree .p-treenode-content.p-highlight {
-  @apply bg-transparent text-white;
+:deep(.p-treenode-content:focus) {
+  box-shadow: none;
+}
+
+:deep(.p-treenode-content.p-highlight) {
+  background: transparent;
+  color: white;
+}
+
+:deep(.p-tree-container) {
+  padding-bottom: 1rem;
 }
 </style>
