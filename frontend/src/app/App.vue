@@ -9,6 +9,8 @@ const isMainRoute = computed(() => route.path === '/main');
 </script>
 
 <template>
+
+
   <div id="app" class="w-vdw">
     <div v-show="isMainRoute" class="background-image"></div>
     <Header />

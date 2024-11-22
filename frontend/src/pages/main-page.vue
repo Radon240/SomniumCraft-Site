@@ -1,7 +1,7 @@
 <template>
   <main class="w-full flex justify-start items-start flex-col flex-grow-1 absolute">
     <div class="top-content w-full static flex flex-col justify-center items-center text-white/90 z-10 bg-backgroundMainPage-100/40 backdrop-blur-sm ">
-      <span>SomniumCraft</span>
+      <span class="font-semibold">SomniumCraft</span>
       <div class="button-container flex justify-center items-center gap-8">
         <a href="https://discord.com/invite/CEDEQU6n6Y" id="start-play" target="_blank"
         class="non-italic border-0 inline-block cursor-pointer font-bold">Начать играть</a>
@@ -17,7 +17,7 @@
 
     </div>
     <!-- Кастомное уведомление -->
-    <div v-if="showNotification" class="custom-toast">
+    <div v-if="showNotification" class="custom-toast font-semibold">
       IP адрес скопирован!
     </div>
   </main>
@@ -76,7 +76,7 @@ export default {
   padding: 0;
   box-sizing: border-box;
   font-family: "Roboto", sans-serif;
-  font-style: normal;
+
   border: none;
   outline: none;
   text-decoration: none;
@@ -169,9 +169,7 @@ html {
 }
 
 @media (max-width: 1200px) {
-  html {
-    font-size: 62%;
-  }
+
   :root {
     --font-size-button: 1.5rem;
   }

@@ -2,10 +2,11 @@
 import { onMounted, ref } from 'vue';
 import { getUUIDByNickname } from '@/shared/api/getUUIDByNickname';
 import SkinViewer from "@/shared/components/3DSkin/SkinViewer.vue";
+import {useUserStore} from "@/stores/userStore.ts";
 // import * as skinview3d from "skinview3d";
 
 // Создаём реактивные переменные
-const nickname = ref('Radon24');
+const nickname = ref(useUserStore().nickname);
 const error = ref('');
 const UUID = ref('');
 const nameHistory = ref([]);  // Переменная для хранения истории имен

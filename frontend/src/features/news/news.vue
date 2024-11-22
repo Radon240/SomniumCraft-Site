@@ -7,6 +7,7 @@
       <span>Новости</span>
     </div>
     <div class="news rounded-[30px] flex flex-col gap-[2vw] max-h-[90vh] overflow-y-auto">
+
             <NewsItem/>
     </div>
   </div>

@@ -1,23 +1,25 @@
-<script>
+<script setup>
 import { computed } from 'vue';
 import { useRoute } from 'vue-router';
+import { useUserStore } from '@/stores/userStore.ts';
 
+// Используем роутер
+const route = useRoute();
 
-export default {
+// Получаем store из Pinia
+const userStore = useUserStore();
 
-  setup() {
-    const route = useRoute();
+// Получаем nickname из store
+const nickname = computed(() => userStore.nickname);
 
-    const isWikiRoute = computed(() => route.path === '/wiki' ||
-        route.path.startsWith('/categories/') ||
-        route.path.startsWith('/articles/'));
-
-    return {
-      isWikiRoute
-    };
-  }
-};
+// Проверяем, является ли текущий маршрут частью Wiki
+const isWikiRoute = computed(() =>
+    route.path === '/wiki' ||
+    route.path.startsWith('/categories/') ||
+    route.path.startsWith('/articles/')
+);
 </script>
+
 
 <template>
   <header class ="no-select fixed w-full h-20 top-0 left-0 bg-backgroundHeader/80 flex justify-between items-center z-[100] backdrop-blur-sm gap-[10%]">
@@ -32,6 +34,9 @@ export default {
     <label for="menu">
       <font-awesome-icon :icon="['fas', 'bars']" />
     </label>
+    <a href="/main" class="textLogo">
+      <span class="font-semibold text-2xl md:text-2xl lg:text-2xl xl:text-2xl text-white text-nowrap">SomniumCraft</span>
+    </a>
 
     <nav class="navbar flex gap-8">
 
@@ -40,19 +45,34 @@ export default {
       <a href="https://world.scmc.dev/" target="_blank">Карта</a>
       <router-link to="/rules">Правила</router-link>
       <router-link to="/other">Прочее</router-link>
-
+      <a href="/account" target="_blank" class="w-full">
+        <div class="buttonsMobile hidden">
+          <a href="/account" target="_blank" class="w-full">
+            <button>Личный кабинет</button>
+          </a>
+        </div>
+      </a>
     </nav>
 
-    <div class="containerInfo">
+    <div class="containerInfo w-auto">
+      <!-- Аватар -->
       <div class="avatar">
-<!--        <img src="../../resources/images/steve.png" draggable="false"/>-->
-        <img  :src="`https://mineskin.eu/helm/Radon24`" alt="Skin"  draggable="false"/>
+        <img
+            :src="nickname === 'Незнакомец'
+          ? '../../resources/images/steve.png'
+          : `https://mineskin.eu/helm/${nickname}`"
+            alt="Skin"
+            draggable="false"
+        />
       </div>
-      <div class="info">
-        <span>Приветствуем, Незнакомец</span>
-        <div class="buttons">
-          <a href="/account" target="_blank" class="w-full"><button>Личный кабинет</button> </a>
 
+      <!-- Приветствие -->
+      <div class="info">
+        <span>Приветствуем, {{ nickname === 'Незнакомец' ? 'Незнакомец' : nickname }}</span>
+        <div class="buttons">
+          <a href="/account" target="_blank" class="w-full">
+            <button>Личный кабинет</button>
+          </a>
         </div>
       </div>
     </div>
@@ -82,6 +102,7 @@ header {
   border-bottom: var(--border-header); /* Параметры линии внизу */
 
 }
+
 .logo {
   font-size: 2rem;
   transition: all 1s ease;
@@ -139,7 +160,9 @@ header label {
   opacity: 0;
   display: none;
 }
-
+.textLogo{
+  display: none;
+}
 .containerInfo {
   display: flex;
   align-items: center;
@@ -171,13 +194,16 @@ img, video {
 
 }
 
-.info .buttons {
+.buttons {
   display: flex;
 
 
 }
+.buttons button {
+  display: flex;
+}
 
-.info .buttons button {
+.buttons button, .buttonsMobile button {
   padding: 0.5rem 0.1%;
   border: 1px solid rgba(255,255,255, 0.1);
   background: transparent;
@@ -189,7 +215,7 @@ img, video {
   width: 100%;
 }
 
-.buttons button:hover {
+.buttons button:hover, .buttonsMobile:hover {
   background-color: var(--pastel-blauw);
   transition: all 1s ease;
 
@@ -209,14 +235,37 @@ img, video {
   }
 }
 @media (max-width: 768px) {
+  header{
+   justify-content: start;
+
+  }
+  .logo{
+      display: none;
+  }
+  .textLogo{
+    display: block;
+  }
   header label {
     visibility: visible;
     opacity: 1;
     display: block;
+    margin-left: 2rem;
+  }
+  .buttonsMobile{
+    display: block;
+  }
+  .containerInfo{
+    display: none;
+  }
+  /* После клика на ссылку сбрасываем состояние чекбокса */
+  .navbar a {
+    pointer-events: all;
   }
 
+  a:active + input[type="checkbox"] {
+    display: none;
+  }
   header .navbar {
-
     display: flex;
     flex-direction: column;
     gap: 1rem;
@@ -227,11 +276,14 @@ img, video {
     padding: 0.5rem 2rem;
     border-top: .1rem solid rgba(0,0,0, 0.1);
     box-shadow: var(--box-shadow);
-    transform-origin: top;
-    transform: scale(0);
+    transform-origin: left;
+    transform: scaleX(0);
+    height: 100vh;
     opacity: 0;
-    background-color: rgba(var(--background-header));
+    z-index: 999;
+    background-color: rgba(14,15,20,1);
     backdrop-filter: blur(3px);
+    transition: transform .2s ease;
 
 
   }
@@ -242,7 +294,8 @@ img, video {
 
   }
   header input:checked ~ .navbar {
-    transform: scale(1);
+    transform: scaleX(1);
+    transition: transform .1s ease;
     opacity: 1;
   }
   .info p{
