@@ -1,7 +1,6 @@
 <script setup>
 import { onMounted, ref } from 'vue';
 import { getUUIDByNickname } from '@/shared/api/getUUIDByNickname';
-import { getNameHistory } from '@/shared/api/getNameHistory.js';
 import SkinViewer from "@/shared/components/3DSkin/SkinViewer.vue";
 // import * as skinview3d from "skinview3d";
 
@@ -16,10 +15,11 @@ const skinViewer = ref(null); // Храним объект SkinViewer
 
 
 // Функция для переключения между 2D и 3D
-const isVisible = ref(true);
+const isVisible = ref(false);
 
 // Функция для переключения видимости
 const toggleVisibility = () => {
+  is3D.value = !is3D.value;
   isVisible.value = !isVisible.value;
 };
 
@@ -63,18 +63,42 @@ onMounted(() => {
   <div class="content w-full min-h-[calc(100dvh-5rem)] h-auto mt-20 flex flex-col justify-start items-center">
 
     <div class="container flex w-full h-full items-start justify-start py-10 p-10 gap-5">
-      <div class="view">
+
+      <div class="view relative ">
         <div v-if="isVisible" class="skin bg-background-element/10 p-10 flex flex-col h-full">
-          <SkinViewer :nick="'Radon24'" />
+          <SkinViewer :nick="nickname" class="cursor-move"/>
         </div>
 
         <!-- 2D версия скина -->
-        <div v-else class="skin bg-background-element/10 p-10 flex flex-col h-full ">
-          <img :src="`https://mineskin.eu/armor/body/${nickname}/100.png`" alt="Скин игрока" class="h-1/2"/>
+        <div
+            v-else
+            class="skin bg-background-element/10 p-10 flex h-full justify-center items-center"
+        >
+          <div class="h-[400px] w-[300px] flex justify-center items-center">
+            <img
+                :src="`https://vzge.me/full/800/${nickname}`"
+                alt="Скин игрока"
+                class="h-full w-auto"
+            />
+          </div>
         </div>
-        <button @click="toggleVisibility" class="bg-blue-500 text-white py-2 px-4 rounded">
-          Переключить {{ is3D ? 'на 2D' : 'на 3D' }} вид
-        </button>
+<!--        <button @click="toggleVisibility" class="bg-blue-500 text-white py-2 px-4 rounded w-full mt-10  ">-->
+<!--          Переключить {{ is3D ? 'на 2D' : 'на 3D' }} вид-->
+<!--        </button>-->
+
+          <button @click="toggleVisibility" class="
+                  bg-gradient-to-r from-[#00d2ff] via-[#3a7bd5] to-[#00d2ff]
+                  bg-[length:200%_auto] hover:bg-[position:right_center]
+                  py-2 px-3
+                  shadow-md hover:shadow-lg
+                  rounded-2xl
+                  transition-all duration-500 mt-5
+                  absolute bottom-4 right-4
+                   "
+         type="button">
+            {{ is3D ? '2D' : '3D' }}
+          </button>
+
       </div>
 
 
@@ -88,10 +112,7 @@ onMounted(() => {
             <span class="w-1/2 text-end text-xl md:text-xl lg:text-xl xl:text-xl text-white font-light text-wrap break-all">{{ UUID }}</span>
           </div>
           <div class="nameHistory">
-            <span class="w-full text-end text-xl md:text-xl lg:text-xl xl:text-xl text-white font-normal text-nowrap">
-              История имен:
 
-            </span>
 
           </div>
 
