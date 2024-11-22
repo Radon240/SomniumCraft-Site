@@ -199,9 +199,7 @@ img, video {
 
 
 }
-.buttons button {
-  display: flex;
-}
+
 
 .buttons button, .buttonsMobile button {
   padding: 0.5rem 0.1%;

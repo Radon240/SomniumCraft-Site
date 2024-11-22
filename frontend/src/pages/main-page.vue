@@ -1,7 +1,7 @@
 <template>
-  <main class="w-full flex justify-start items-start flex-col flex-grow-1 absolute">
+  <main class="w-full flex justify-start items-start flex-col flex-grow-1 relative">
     <div class="top-content w-full static flex flex-col justify-center items-center text-white/90 z-10 bg-backgroundMainPage-100/40 backdrop-blur-sm ">
-      <span class="font-semibold">SomniumCraft</span>
+      <span class="font-bold">SomniumCraft</span>
       <div class="button-container flex justify-center items-center gap-8">
         <a href="https://discord.com/invite/CEDEQU6n6Y" id="start-play" target="_blank"
         class="non-italic border-0 inline-block cursor-pointer font-bold">Начать играть</a>
@@ -70,13 +70,15 @@ export default {
 
 <style>
 
-
+.top-content{
+  --font-size-button:  1.3rem;
+}
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   font-family: "Roboto", sans-serif;
-
+  font-style: normal;
   border: none;
   outline: none;
   text-decoration: none;
@@ -100,13 +102,13 @@ html {
   padding: calc(var(--font-size-button) * 0.7) calc(var(--font-size-button) * 1.5);
   border-radius: 30px;
   box-shadow: inset 0 -2px 15px -9px #2D2D2D;
-  transition: 1s;
+  transition: filter 1s ease;
 }
 
 .button-container button:hover, .button-container a:hover {
   filter: brightness(115%);
   -webkit-filter: brightness(115%);
-  transition: all 1s ease;
+  transition: filter 1s ease;
 }
 
 #start-play {
@@ -126,14 +128,14 @@ html {
 }
 .custom-toast {
   position: fixed;
-  bottom: var(--font-size-button);
+  bottom: 1rem;
   left: 50%;
   transform: translateX(-50%) translateY(50px);
   /* background-color: rgba(29, 30, 38, 0.7); */
   background-color: rgba(255, 255, 255, 0.1);
   color: white;
-  padding: calc(var(--font-size-button) / 2) calc(var(--font-size-button) * 2);
-  border-radius: calc(var(--font-size-button) * 2);
+  padding: calc(1.3rem / 2) calc(1.3rem * 2);
+  border-radius: calc(1.3rem * 2);
   box-shadow: var(--box-shadow);
   opacity: 0;
   transition: opacity 0.5s ease, transform 0.5s ease;
@@ -169,8 +171,10 @@ html {
 }
 
 @media (max-width: 1200px) {
-
-  :root {
+  html {
+    font-size: 62%;
+  }
+  .top-content {
     --font-size-button: 1.5rem;
   }
   .custom-toast {
@@ -191,7 +195,7 @@ html {
 
 }
 @media (max-width: 770px) {
-  :root {
+  .top-content {
     --font-size-button: 0.9rem;
   }
   .custom-toast {
