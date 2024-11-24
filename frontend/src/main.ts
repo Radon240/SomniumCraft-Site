@@ -11,6 +11,7 @@ import { createPinia } from "pinia"
 import PrimeVue from 'primevue/config'
 import Aura from '@primevue/themes/aura'
 import '@fortawesome/fontawesome-free/css/all.css'
+import keycloakPlugin from "@/shared/plugins/keycloakPlugin.ts";
 
 library.add(faBars, faYoutube, faDiscord, faRotateRight, fas)
 
@@ -20,11 +21,19 @@ const app = createApp(App)
 app.component('font-awesome-icon', FontAwesomeIcon)
 
 app.use(router)
+
 app.use(pinia)
+
 app.use(PrimeVue, {
     theme: {
         preset: Aura
     }
 });
-
+app.use(keycloakPlugin, {
+    keycloakInitOptions: {
+        onLoad: "check-sso",
+        checkLoginIframe: false,
+        silentCheckSsoRedirectUri: location.origin + "/silent-check-sso.html"
+    }
+})
 app.mount("#app")

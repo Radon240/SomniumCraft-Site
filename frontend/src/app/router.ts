@@ -11,6 +11,15 @@ import WikiLayout from "@/pages/wiki/wiki-layout.vue";
 import WikiPlaceholder from "@/widgets/wiki-placeholder/ui.vue";
 import WikiArticlePage from "@/widgets/wiki-content/ui.vue";
 import PersonalAccountPage from "@/pages/personalAccount-page.vue";
+import {UserRole} from "@/entities/Auth/UserRole.ts";
+import {keycloakService} from "@/shared/service/keycloakService.ts";
+import useAuthStore from "@/entities/Auth/AuthStore.ts";
+
+declare module "vue-router" {
+    interface RouteMeta {
+        allowedRoles?: UserRole[]
+    }
+}
 
 const routes: Array<RouteRecordRaw> = [
     { path: '/', redirect: '/main' },
@@ -19,7 +28,7 @@ const routes: Array<RouteRecordRaw> = [
     { path: '/news', name: 'NewsPage', component: NewsPage },
     { path: '/rules', name: 'RulesPage', component: RulesPage },
     { path: '/other', name: 'OtherPage', component: OtherPage },
-    { path: '/account', name: 'PersonalAccountPage', component: PersonalAccountPage },
+    { path: '/account', name: 'PersonalAccountPage', component: PersonalAccountPage, meta: { allowedRoles: [UserRole.ADMIN, UserRole.EDITOR, UserRole.USER]}},
     {
         path: '/wiki',
         component: WikiLayout,
@@ -45,9 +54,6 @@ window.addEventListener('hashchange', () => {
     currentPath.value = window.location.hash;
 });
 
-const currentView = computed((): typeof NotFound => {
-    return routes[!(!currentPath.value.slice(1) && !'/')] || NotFound;
-});
 
 const router = createRouter({
     history: createWebHistory(),
@@ -62,5 +68,32 @@ const router = createRouter({
         }
     },
 });
+
+router.beforeEach(async (to, from) => {
+    if (!keycloakService.isInitialized()) {
+        await new Promise<void>(resolve => {
+            keycloakService.onKeycloakReady(() => resolve())
+        })
+    }
+})
+
+router.beforeEach(async (to, from) => {
+    const authStore = useAuthStore()
+    let hasAnyRole = to.meta.allowedRoles === undefined
+    const requireAuthentication = to.meta.allowedRoles !== undefined
+
+    if(requireAuthentication && !authStore.isAuthenticated) {
+        await keycloakService.login({ redirectUri: `${window.location.origin}/${to.fullPath}` })
+    }
+
+    to.meta.allowedRoles?.forEach((role) => {
+        if (authStore.hasRole(role)) {
+            hasAnyRole = true
+        }
+    })
+
+    if (!hasAnyRole)
+        return { name: "MainPage" }
+})
 
 export default router;
