@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import {wikiApi} from "@/shared/api/wikiApiService.ts";
+import {wikiApi} from "@/shared/service/wikiApiService.ts";
 import {GetArticleResponseAuthor, GetArticleResponseCategory, ReviewStatus} from "@/shared/api";
 
 interface Article {

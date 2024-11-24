@@ -2,7 +2,7 @@ import {defineStore} from "pinia";
 
 import {GetCategoryArticlesResponseElement} from "@/shared/api";
 import {CategoryArticlesElement, CategoryArticles} from "./types.ts";
-import {wikiApi} from "@/shared/api/wikiApiService.ts";
+import {wikiApi} from "@/shared/service/wikiApiService.ts";
 
 
 

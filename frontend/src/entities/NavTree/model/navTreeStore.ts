@@ -1,6 +1,6 @@
 import {defineStore} from "pinia";
 
-import {wikiApi} from "@/shared/api/wikiApiService.ts";
+import {wikiApi} from "@/shared/service/wikiApiService.ts";
 import {GetCategoriesTreeResponseElement, GetNavigationsTreeResponseElement} from "@/shared/api";
 import {NavTree, NavTreeNode} from "./types.ts";
 
