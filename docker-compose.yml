@@ -1,0 +1,100 @@
+﻿networks:
+  wiki-test:
+    driver: bridge
+services:
+  nginx:
+    image: nginx:1.25.4-alpine
+    environment:
+        TZ: "Europe/Moscow"
+    env_file: 
+      - .env
+    networks:
+      - wiki-test
+    volumes:
+        - ./backend/site/code:/var/www/backend/
+        - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+        - ./nginx/conf.d/:/etc/nginx/conf.d/
+    ports:
+      - "${WEB_PORT}:80"
+
+  sonmwikirest:
+    image: sonmwikirest:latest
+    build:
+      context: ./backend/API/
+      dockerfile: /WebApi/Dockerfile
+    env_file: ./backend/API/app.example.env
+    ports:
+      - "1337:8080"
+    networks: 
+      - wiki-test
+    depends_on:
+      - postgres_wiki_db
+      - keycloak
+  keycloak:
+    image: quay.io/keycloak/keycloak:23.0.1
+    command: 
+      - "start-dev"
+      - "--import-realm"
+    environment:
+      TZ: "Europe/Moscow"
+      DB_SCHEMA: public
+      KEYCLOAK_ADMIN: admin
+      KEYCLOAK_ADMIN_PASSWORD: admin
+      KC_DB: postgres
+      KC_DB_URL_HOST: postgres_keycloak_db
+      KC_DB_URL_PORT: 5432
+      KC_DB_URL_DATABASE: keycloak
+      KC_DB_USERNAME: keycloak
+      KC_DB_PASSWORD: 67asdt790fguqp4wg7rasd08-fyher89yghys80h8at0sghertuqwo
+      KC_DB_SCHEMA: public
+      KC_HTTP_ENABLED: true
+    ports:
+      - "8091:8080"
+    networks:
+      - wiki-test
+    depends_on: 
+      - postgres_keycloak_db
+    volumes:
+      - ./keycloakImports:/opt/keycloak/data/import
+  postgres_wiki_db:
+    container_name: wiki_db
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 67asdt790fguqp4wg7rasd08-fyher89yghys80h8at0sghertuqwo
+      POSTGRES_DB: wiki
+    ports:
+      - "5433:5432"
+    networks:
+      - wiki-test
+    volumes:
+      - postgres-wiki-data:/var/lib/postgresql-wiki/data
+  postgres_keycloak_db:
+    container_name: keycloak_db
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: keycloak
+      POSTGRES_PASSWORD: 67asdt790fguqp4wg7rasd08-fyher89yghys80h8at0sghertuqwo
+      POSTGRES_DB: keycloak
+      TZ: "Europe/Moscow"
+    ports:
+      - "5434:5432"
+    networks:
+      - wiki-test
+    volumes:
+      - postgres-keycloak-data:/var/lib/postgresql-keycloak/data
+  app:
+    build:
+      context: ./backend/site/
+      dockerfile: /build/Dockerfile
+    networks:
+      - wiki-test
+    volumes:
+      - ./backend/site/code:/var/www/backend/
+    env_file:
+      - ./backend/site/code/.env
+  
+  
+volumes:
+  postgres-wiki-data:
+  postgres-keycloak-data:  
