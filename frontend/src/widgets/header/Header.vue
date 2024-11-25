@@ -2,15 +2,20 @@
 import { computed } from 'vue';
 import { useRoute } from 'vue-router';
 import { useUserStore } from '@/stores/userStore.ts';
+import useAuthStore from "@/entities/Auth/AuthStore.ts";
 
 // Используем роутер
 const route = useRoute();
 
 // Получаем store из Pinia
 const userStore = useUserStore();
+const authStore = useAuthStore();
+
+console.log(authStore.isAuthenticated)
 
 // Получаем nickname из store
-const nickname = computed(() => userStore.nickname);
+//const nickname = computed(() => userStore.nickname);
+const nickname = computed(() => authStore.username);
 
 // Проверяем, является ли текущий маршрут частью Wiki
 const isWikiRoute = computed(() =>
@@ -58,17 +63,17 @@ const isWikiRoute = computed(() =>
       <!-- Аватар -->
       <div class="avatar">
         <img
-            :src="nickname === 'Незнакомец'
-          ? '../../resources/images/steve.png'
+            :src="authStore.isAuthenticated === false
+          ? '/steve.png'
           : `https://mineskin.eu/helm/${nickname}`"
             alt="Skin"
-            draggable="false"
+            draggable="true"
         />
       </div>
 
       <!-- Приветствие -->
       <div class="info">
-        <span>Приветствуем, {{ nickname === 'Незнакомец' ? 'Незнакомец' : nickname }}</span>
+        <span>Приветствуем, {{ authStore.isAuthenticated === false ? 'Незнакомец' : nickname }}</span>
         <div class="buttons">
           <a href="/account" target="_blank" class="w-full">
             <button>Личный кабинет</button>

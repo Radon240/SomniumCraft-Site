@@ -28,7 +28,7 @@ const routes: Array<RouteRecordRaw> = [
     { path: '/news', name: 'NewsPage', component: NewsPage },
     { path: '/rules', name: 'RulesPage', component: RulesPage },
     { path: '/other', name: 'OtherPage', component: OtherPage },
-    { path: '/account', name: 'PersonalAccountPage', component: PersonalAccountPage, meta: { allowedRoles: [UserRole.ADMIN, UserRole.EDITOR, UserRole.USER]}},
+    { path: '/account', name: 'PersonalAccountPage', component: PersonalAccountPage, meta: { allowedRoles: [UserRole.USER]}},
     {
         path: '/wiki',
         component: WikiLayout,
