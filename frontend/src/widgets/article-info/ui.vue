@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import { HistoryIcon, PencilIcon, ShareIcon } from 'lucide-vue-next'
 import { computed } from 'vue'
+import useAuthStore from "@/entities/Auth/AuthStore.ts";
+
+const authStore = useAuthStore();
 
 interface Author {
   id: string;
@@ -49,7 +52,7 @@ const getAvatarUrl = (size: number, nickname: string) => `https://vzge.me/face/$
       <button class="text-white hover:text-blue-400 transition-colors">
         <HistoryIcon class="w-6 h-6" />
       </button>
-      <button class="text-white hover:text-blue-400 transition-colors">
+      <button v-if="authStore.isAuthenticated" class="text-white hover:text-blue-400 transition-colors">
         <PencilIcon class="w-6 h-6" />
       </button>
       <button class="text-white hover:text-blue-400 transition-colors">
