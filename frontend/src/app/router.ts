@@ -1,4 +1,4 @@
-import { computed, ref } from "vue";
+import { ref } from "vue";
 import {createRouter, createWebHistory, RouteRecordRaw} from 'vue-router';
 
 import MainPage from "@/pages/main-page.vue";
@@ -10,6 +10,7 @@ import OtherPage from "@/pages/other/other-page.vue";
 import WikiLayout from "@/pages/wiki/wiki-layout.vue";
 import WikiPlaceholder from "@/widgets/wiki-placeholder/ui.vue";
 import WikiArticlePage from "@/widgets/wiki-content/ui.vue";
+import WikiArticleEditor from "@/widgets/article-editor/ui.vue"
 import PersonalAccountPage from "@/pages/personalAccount-page.vue";
 import {UserRole} from "@/entities/Auth/UserRole.ts";
 import {keycloakService} from "@/shared/service/keycloakService.ts";
@@ -42,7 +43,14 @@ const routes: Array<RouteRecordRaw> = [
                 path: '/articles/:articleTitle',
                 name: 'Article',
                 component: WikiArticlePage
-            }
+            },
+            {
+                name: "articleEditor",
+                path: "/articles/editor/:articleId?",
+                component: WikiArticleEditor,
+                props: true,
+                meta: { allowedRoles: [UserRole.ADMIN, UserRole.EDITOR, UserRole.USER] }
+            },
         ]
     },
     { path: '/:pathMatch(.*)*', name: 'NotFound', component: NotFound }
