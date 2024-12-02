@@ -1,20 +1,16 @@
 <script setup>
 import { computed } from 'vue';
 import { useRoute } from 'vue-router';
-import { useUserStore } from '@/stores/userStore.ts';
 import useAuthStore from "@/entities/Auth/AuthStore.ts";
+import {keycloakService} from "@/shared/service/keycloakService.ts";
 
 // Используем роутер
 const route = useRoute();
 
 // Получаем store из Pinia
-const userStore = useUserStore();
 const authStore = useAuthStore();
 
-console.log(authStore.isAuthenticated)
-
 // Получаем nickname из store
-//const nickname = computed(() => userStore.nickname);
 const nickname = computed(() => authStore.username);
 
 // Проверяем, является ли текущий маршрут частью Wiki
@@ -44,19 +40,11 @@ const isWikiRoute = computed(() =>
     </a>
 
     <nav class="navbar flex gap-8">
-
       <router-link to="/main">Главная</router-link>
       <router-link to="/wiki">Вики</router-link>
       <a href="https://world.scmc.dev/" target="_blank">Карта</a>
       <router-link to="/rules">Правила</router-link>
       <router-link to="/other">Прочее</router-link>
-      <a href="/account" target="_blank" class="w-full">
-        <div class="buttonsMobile hidden">
-          <a href="/account" target="_blank" class="w-full">
-            <button>Личный кабинет</button>
-          </a>
-        </div>
-      </a>
     </nav>
 
     <div class="containerInfo w-auto">
@@ -75,8 +63,11 @@ const isWikiRoute = computed(() =>
       <div class="info">
         <span>Приветствуем, {{ authStore.isAuthenticated === false ? 'Незнакомец' : nickname }}</span>
         <div class="buttons">
-          <a href="/account" target="_blank" class="w-full">
+          <a v-if="authStore.isAuthenticated" href="/account" target="_blank" class="w-full">
             <button>Личный кабинет</button>
+          </a>
+          <a v-else target="_blank" class="w-full">
+            <button @click="keycloakService.login()">Войти</button>
           </a>
         </div>
       </div>
@@ -97,7 +88,6 @@ const isWikiRoute = computed(() =>
   text-decoration: none;
   list-style:none;
   text-transform: capitalize;
-
 }
 
 header {
