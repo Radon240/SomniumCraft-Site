@@ -23,6 +23,7 @@ watch(
   <div class="flex flex-col md:flex-row gap-8">
     <ArticleInfo
         class="w-fit order-1"
+        :articleId="articleStore.article?.id"
         :contributors="articleStore.article?.contributors"
         :lastEditDate="articleStore.article?.submittedTimestamp"
     />

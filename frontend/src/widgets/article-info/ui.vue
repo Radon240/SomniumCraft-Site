@@ -2,8 +2,10 @@
 import { HistoryIcon, PencilIcon, ShareIcon } from 'lucide-vue-next'
 import { computed } from 'vue'
 import useAuthStore from "@/entities/Auth/AuthStore.ts";
+import {useRouter} from "vue-router";
 
 const authStore = useAuthStore();
+const router = useRouter();
 
 interface Author {
   id: string;
@@ -11,6 +13,7 @@ interface Author {
 }
 
 const props = defineProps<{
+  articleId?: string;
   lastEditDate: string | null;
   contributors: Author[];
 }>();
@@ -52,7 +55,7 @@ const getAvatarUrl = (size: number, nickname: string) => `https://vzge.me/face/$
       <button class="text-white hover:text-blue-400 transition-colors">
         <HistoryIcon class="w-6 h-6" />
       </button>
-      <button v-if="authStore.isAuthenticated" class="text-white hover:text-blue-400 transition-colors">
+      <button @click="router.push('/articles/editor/' + props.articleId)" v-if="authStore.isAuthenticated" class="text-white hover:text-blue-400 transition-colors">
         <PencilIcon class="w-6 h-6" />
       </button>
       <button class="text-white hover:text-blue-400 transition-colors">
