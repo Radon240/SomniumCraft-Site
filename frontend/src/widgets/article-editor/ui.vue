@@ -5,6 +5,7 @@ import {CreateArticleRequest, EditArticleRequest, GetCategoriesResponseElement} 
 import useArticleEditorStore from "@/entities/Article/ArticleEditorStore.ts"
 import {wikiApi} from "@/shared/service/wikiApiService.ts";
 import {maxLength, required} from "@vuelidate/validators";
+import MdEditor from "md-editor-v3/lib/es/MdEditor.mjs";
 
 const props = defineProps<{
   articleId?: string
