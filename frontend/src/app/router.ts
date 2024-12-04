@@ -11,6 +11,7 @@ import WikiLayout from "@/pages/wiki/wiki-layout.vue";
 import WikiPlaceholder from "@/widgets/wiki-placeholder/ui.vue";
 import WikiArticlePage from "@/widgets/wiki-content/ui.vue";
 import WikiArticleEditor from "@/widgets/article-editor/ui.vue"
+import WikiReview from "@/widgets/wiki-review/ui.vue"
 import PersonalAccountPage from "@/pages/personalAccount-page.vue";
 import {UserRole} from "@/entities/Auth/UserRole.ts";
 import {keycloakService} from "@/shared/service/keycloakService.ts";
@@ -52,6 +53,13 @@ const routes: Array<RouteRecordRaw> = [
                 meta: { allowedRoles: [UserRole.ADMIN, UserRole.EDITOR, UserRole.USER] }
             },
         ]
+    },
+    {
+        name: "review",
+        path: "/review/:revisionId?",
+        component: WikiReview,
+        props: true,
+        meta: { allowedRoles: [UserRole.ADMIN, UserRole.EDITOR] }
     },
     { path: '/:pathMatch(.*)*', name: 'NotFound', component: NotFound }
 ];
