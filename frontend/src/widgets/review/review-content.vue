@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import { storeToRefs } from 'pinia'
-import { useArticleStore } from '@/entities/Article/ArticleStore.ts'
-import { MdCatalog, MdPreview } from "md-editor-v3"
+import { MdPreview } from "md-editor-v3"
 import "md-editor-v3/lib/style.css"
-import Skeleton from 'primevue/skeleton'
 import { AlertCircle } from 'lucide-vue-next'
+import { onMounted, watch } from "vue"
+import { useArticleStore } from '@/entities/Article/ArticleStore.ts'
+import { storeToRefs } from 'pinia'
 
 const props = defineProps<{
   articleId?: string
@@ -15,31 +15,16 @@ const props = defineProps<{
   hideHistory?: boolean
 }>()
 
-const popup = ref()
-const articleData: Ref<GetArticleResponse | undefined> = ref()
-const loading = ref(true)
-const error = ref()
+const articleStore = useArticleStore()
+const { article, loading, error } = storeToRefs(articleStore)
 
 const loadArticle = async () => {
-  articleData.value = undefined
-  loading.value = true
-
-  try {
-    error.value = undefined
-    if (!props.revisionId) {
-      if (props.articleId == undefined) return
-      articleData.value = (await wikiApi.api.getArticle(props.articleId)).data
-    } else
-      articleData.value = (await wikiApi.api.getArticleByRevision(props.revisionId)).data
-  } catch (err) {
-    console.log(err)
-    error.value = err
-  }
-  loading.value = false
+  await articleStore.fetchArticleByRevision(props.revisionId)
 }
 
-const id = "preview-only"
-const scrollElement = document.documentElement
+onMounted(loadArticle)
+
+watch(() => [props.articleId, props.revisionId], loadArticle)
 
 </script>
 
@@ -47,7 +32,7 @@ const scrollElement = document.documentElement
   <div class="bg-gray-900 rounded-lg shadow-md overflow-hidden">
     <div class="p-6">
       <Skeleton v-if="loading" width="70%" height="2rem" class="mb-2" />
-      <h1 v-else-if="article" class="text-2xl font-bold mb-4">{{ article.title }}</h1>
+      <h1 v-else-if="article && !hideTitle" class="text-2xl font-bold mb-4 text-white">{{ article.title }}</h1>
 
       <div v-if="loading" class="space-y-4">
         <Skeleton v-for="i in 3" :key="i" width="100%" height="1.5rem" />
@@ -60,7 +45,7 @@ const scrollElement = document.documentElement
 
       <div v-else-if="article" class="markdown-content">
         <MdPreview
-            :modelValue="article.content"
+            :modelValue="article.content?.toString()"
             :id="article.id"
             theme="dark"
             previewTheme="default"
@@ -71,4 +56,5 @@ const scrollElement = document.documentElement
 </template>
 
 <style scoped>
+/* You can add any additional styles here if needed */
 </style>

@@ -34,8 +34,9 @@ const loadCategories = async () => {
 
   try {
     categories.value = (await wikiApi.api.getCategories()).data.data
-    if (isNewArticle.value)
+    if (isNewArticle.value) {
       selectedCategories.value = editorStore.categories
+    }
     selectedCategories.value = selectedCategories.value.filter(x => categories.value.some(e => e.id === x))
     loadingCategories.value = false
   } catch (error) {
@@ -134,8 +135,8 @@ onUnmounted(() => {
 
 <template>
   <div class="container flex-1 w-full">
-    <h1 v-if="isNewArticle" class="m-0">Create Article</h1>
-    <h1 v-else class="m-0">Edit Article</h1>
+    <h1 v-if="isNewArticle" class="m-0">Создание статьи</h1>
+    <h1 v-else class="m-0">Редактирование статьи</h1>
     <Divider class="mb-5" />
     <div class="flex justify-content-between w-full mb-5">
       <div>
@@ -153,29 +154,7 @@ onUnmounted(() => {
           {{ error.$message }}
         </Tag>
       </div>
-      <Button
-          severity="primary"
-          :disabled="vuelidate.$error || loadingArticle || loadingCategories"
-          label="Submit"
-          class="hidden md:inline-flex align-self-start"
-          @click="submit"
-      />
     </div>
-    <FloatLabel class="mb-5">
-      <MultiSelect
-          id="categories"
-          v-model="selectedCategories"
-          :loading="loadingCategories"
-          :options="categories"
-          display="chip"
-          filter
-          option-value="id"
-          option-label="name"
-          placeholder="Select Categories"
-          class="w-full"
-      />
-      <label for="categories">Categories</label>
-    </FloatLabel>
     <FloatLabel class="w-full md:20rem mb-5">
       <Skeleton v-if="loadingArticle" class="h-full w-full md:w-20rem fadein animation-duration-2000" />
       <InputText

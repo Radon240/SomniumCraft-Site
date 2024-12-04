@@ -43,7 +43,7 @@ load()
 </script>
 
 <template>
-  <div class="revision-list w-fit">
+  <div class="revision-list glass-effect w-fit">
     <div v-if="loading" class="space-y-2">
       <Skeleton v-for="i in 3" :key="i" height="5rem" />
     </div>
@@ -54,15 +54,15 @@ load()
             :key="revision.revisionId"
             @click="select(revision.revisionId)"
             :class="[
-            'p-4 rounded border transition cursor-pointer hover:shadow',
-            selectedRevision === revision.revisionId ? 'border-primary-500 bg-primary-50' : 'border-gray-200'
+            'p-4 gap-10 rounded border transition cursor-pointer hover:shadow',
+            props.selectedRevision === revision.revisionId ? 'border-primary-500 bg-gray-900' : 'border-gray-200'
           ]"
         >
-          <div class="font-semibold text-gray-800">
+          <div class="font-semibold">
             {{ revision.articleIdTitle }}
-            <Chip :label="`Rev. ${revision.revisionId}`" class="ml-2 text-sm bg-gray-100 text-gray-600" />
+            <Chip :label="`Rev. ${revision.revisionId}`" class="ml-2 text-sm bg-gray-100" />
           </div>
-          <div class="text-sm text-gray-600">
+          <div class="text-sm">
             <div class="flex items-center gap-2">
               <i class="pi pi-user"></i> {{ revision.author.name }}
             </div>
@@ -88,7 +88,12 @@ load()
 </template>
 
 <style scoped>
-/* Добавьте стили для более плотного размещения данных */
+.revision-list {
+  backdrop-filter: blur(10px);
+  border-radius: 10px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
 .revision-list ul {
   padding: 0;
   list-style: none;

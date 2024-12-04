@@ -37,5 +37,18 @@ export const useArticleStore = defineStore('article', {
                 this.loading = false
             }
         },
+        async fetchArticleByRevision(revisionId: string) {
+            this.loading = true
+            this.error = null
+            try {
+                const response = await wikiApi.api.getArticleByRevision(revisionId)
+                this.article = response.data
+            } catch (err) {
+                this.error = 'Failed to load revision'
+                console.error(err)
+            } finally {
+                this.loading = false
+            }
+        },
     },
 })
