@@ -17,7 +17,8 @@ const nickname = computed(() => authStore.username);
 const isWikiRoute = computed(() =>
     route.path === '/wiki' ||
     route.path.startsWith('/categories/') ||
-    route.path.startsWith('/articles/')
+    route.path.startsWith('/articles/') ||
+    route.path.startsWith('/review/')
 );
 </script>
 
