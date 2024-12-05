@@ -30,8 +30,12 @@ export class KeycloakService {
     }
 
     async logout(): Promise<void> {
+        await router.push('/');
         await this.keycloakInstance.logout()
         this.authStore?.loadUserData(this.keycloakInstance)
+
+
+
     }
 
     async refreshToken(): Promise<void> {

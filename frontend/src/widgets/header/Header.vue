@@ -20,6 +20,12 @@ const isWikiRoute = computed(() =>
     route.path.startsWith('/articles/') ||
     route.path.startsWith('/review/')
 );
+const isPersonalAccountRoute = computed(() =>
+  route.path.startsWith('/account')
+);
+const logout = () => {
+  keycloakService.logout();
+};
 </script>
 
 
@@ -61,14 +67,28 @@ const isWikiRoute = computed(() =>
       </div>
 
       <!-- Приветствие -->
-      <div class="info">
-        <span>Приветствуем, {{ authStore.isAuthenticated === false ? 'Незнакомец' : nickname }}</span>
+      <div class="info mb-2">
+        <span class="hello">Приветствуем, {{ authStore.isAuthenticated === false ? 'Незнакомец' : nickname }}</span>
         <div class="buttons">
-          <a v-if="authStore.isAuthenticated" href="/account" target="_blank" class="w-full">
+          <a v-if="authStore.isAuthenticated && !isPersonalAccountRoute"  href="/account" target="_blank" class="w-full auth">
+
+            <font-awesome-icon :icon="['fas', 'user']" class="personalLogo font-semibold text-3xl md:text-3xl lg:text-3xl xl:text-3xl text-white text-nowrap mr-5"/>
             <button>Личный кабинет</button>
           </a>
-          <a v-else target="_blank" class="w-full">
+          <a v-if="!authStore.isAuthenticated" href="/account" target="_blank" class="w-full auth">
+            <font-awesome-icon :icon="['fas', 'user']"
+                               class="personalLogo font-semibold text-3xl md:text-3xl lg:text-3xl xl:text-3xl text-white text-nowrap mr-5"/>
             <button @click="keycloakService.login()">Войти</button>
+          </a>
+          <a v-if="authStore.isAuthenticated && isPersonalAccountRoute"
+             target="_blank"
+             class="w-full auth">
+            <font-awesome-icon
+
+                :icon="['fas', 'right-from-bracket']"
+                class="personalLogo font-semibold text-3xl md:text-3xl lg:text-3xl xl:text-3xl text-white text-nowrap mr-5"
+                @click="keycloakService.logout()"/>
+            <button @click="keycloakService.logout()">Выйти</button>
           </a>
         </div>
       </div>
@@ -103,7 +123,9 @@ header {
   font-size: 2rem;
   transition: all 1s ease;
 }
-
+.personalLogo{
+  display: none;
+}
 .logo-img {
   width: 5rem;
   height: 5rem;
@@ -230,7 +252,7 @@ img, video {
 }
 @media (max-width: 768px) {
   header{
-   justify-content: start;
+   justify-content: space-between;
 
   }
   .logo{
@@ -248,8 +270,18 @@ img, video {
   .buttonsMobile{
     display: block;
   }
-  .containerInfo{
+  .auth button{
     display: none;
+    visibility:hidden;
+    opacity: 0;
+  }
+  .hello{
+    display: none;
+    visibility:hidden;
+    opacity: 0;
+  }
+  .personalLogo{
+    display: block;
   }
   /* После клика на ссылку сбрасываем состояние чекбокса */
   .navbar a {
@@ -289,7 +321,7 @@ img, video {
   }
   header input:checked ~ .navbar {
     transform: scaleX(1);
-    transition: transform .1s ease;
+    transition: transform .0s ease;
     opacity: 1;
   }
   .info p{

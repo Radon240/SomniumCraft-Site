@@ -43,6 +43,7 @@ const useAuthStore = defineStore({
                 keycloak.login(); // Перенаправляем на страницу входа Keycloak
             }
         },
+
     }
 })
 

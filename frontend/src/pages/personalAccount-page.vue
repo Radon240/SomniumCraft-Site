@@ -1,5 +1,5 @@
 <script setup>
-import { onMounted, ref } from 'vue';
+import {onMounted, ref, watch} from 'vue';
 import { getUUIDByNickname } from '@/shared/api/getUUIDByNickname';
 import SkinViewer from "@/shared/components/3DSkin/SkinViewer.vue";
 import useAuthStore from "@/entities/Auth/AuthStore.ts";
@@ -11,12 +11,18 @@ const authStore = useAuthStore();
 const nickname = ref(authStore.username);
 const error = ref('');
 const UUID = ref('');
-const nameHistory = ref([]);  // Переменная для хранения истории имен
 const is3D = ref(false); // Переключатель между 2D и 3D
 const skinViewer = ref(null); // Храним объект SkinViewer
+const roles = ref(authStore.roles);
 
-
-
+watch(roles, (newRoles) => {
+  roles.value = newRoles.map((role) => {
+    if (role === 'admin-role') return 'admin';
+    if (role === 'editor-role') return 'editor';
+    if (role === 'user-role') return 'user';
+    return role; // Оставляем значение без изменений, если оно не совпадает
+  });
+}, { immediate: true });
 // Функция для переключения между 2D и 3D
 const isVisible = ref(false);
 
@@ -45,19 +51,7 @@ const fetchUUID = async () => {
   }
 };
 
-// Функция для получения истории имен игрока
-// const fetchNameHistory = async () => {
-//   try {
-//     error.value = '';
-//     // Получаем историю имен
-//     nameHistory.value = await getNameHistory(nickname.value);  // Сохраняем в переменную nameHistory
-//   } catch (err) {
-//     error.value = 'Произошла ошибка при получении истории имен.';
-//     console.error(err);
-//   }
-// };
 
-// Загружаем данные при монтировании компонента
 onMounted(() => {
   fetchUUID();
 });
@@ -114,9 +108,9 @@ onMounted(() => {
             <span class="text-nowrap w-1/2">UUID игрока:</span>
             <span class="w-1/2 text-end text-xl md:text-xl lg:text-xl xl:text-xl text-white font-light text-wrap break-all">{{ UUID }}</span>
           </div>
-          <div class="nameHistory">
-
-
+          <div class="userInfo flex w-full gap-10">
+            <span class="text-nowrap w-1/2">Роли на сайте: </span>
+            <span class="w-1/2 text-end text-xl md:text-xl lg:text-xl xl:text-xl text-white font-light text-wrap break-all ">{{ (roles.sort()).join(', ') }}</span>
           </div>
 
         </div>
@@ -163,6 +157,15 @@ onMounted(() => {
     gap: 1rem;
   }
   .UUID span{
+    width: 100%;
+    text-align: center;
+  }
+  .userInfo{
+    flex-direction: column;
+    width: 100%;
+    gap: 1rem;
+  }
+  .userInfo span{
     width: 100%;
     text-align: center;
   }
