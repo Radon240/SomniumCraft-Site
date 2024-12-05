@@ -2,28 +2,85 @@
   <div class="newsSection flex flex-col items-end">
     <div class="newsBar text-white flex items-center bg-second-background text-[1.5rem]
      rounded-[30px] gap-4">
-      <font-awesome-icon :icon="['fas', 'rotate-right']"  />
+      <font-awesome-icon
+          :icon="['fas', 'rotate-right']"
+          @click="updateChats"
+          class="cursor-pointer updateNews"
+          :class="{
+          'animate-rotate': isSpinning, // Применение анимации вращения
+        }"
+      />
+
 
       <span>Новости</span>
     </div>
     <div class="news rounded-[30px] flex flex-col gap-[2vw] max-h-[90vh] overflow-y-auto">
-
-            <NewsItem/>
+      <!-- Используем v-for для отображения новостей -->
+      <NewsItem/>
     </div>
   </div>
 </template>
 
 
-<script>
-import {defineComponent} from "vue";
+
+<script setup lang="ts">
 import NewsItem from "@/features/news/NewsItem.vue";
+import { fetchNews } from "@/shared/api/fetchNews.js";
+import { useNewsStore } from "@/stores/newsStore.js";
+import { ref } from "vue";
 
-export default defineComponent({
-  components: {NewsItem}
-})
+// Состояние для анимации
+const isSpinning = ref(false);
 
+// Использование newsStore
+const newsStore = useNewsStore();
 
+// Загрузка новостей
+async function loadNews() {
+  try {
+    const fetchedNews = await fetchNews(); // Предполагаем, что fetchNews возвращает массив новостей
+    newsStore.clearNews(); // Очищаем старые данные
+    fetchedNews.forEach((newsItem: any) => newsStore.addNews(newsItem)); // Добавляем новости в store
+    newsStore.sortNews(); // Сортируем новости
+  } catch (error) {
+    console.error("Ошибка при загрузке новостей:", error);
+  }
+}
+
+// Обновление новостей с анимацией
+const updateChats = async () => {
+  if (isSpinning.value) return; // Если анимация уже идет, не запускаем снова
+  isSpinning.value = true; // Начинаем анимацию
+  console.log("Началось вращение");
+
+  const startTime = Date.now(); // Время начала загрузки
+
+  try {
+    await loadNews(); // Загружаем новости и ждем, пока процесс не завершится
+  } catch (error) {
+    console.error("Ошибка при обновлении новостей:", error);
+  }
+
+  const elapsedTime = Date.now() - startTime; // Время, прошедшее с начала загрузки
+
+  if (elapsedTime < 1000) {
+    // Если время выполнения меньше 2 секунд, устанавливаем тайм-аут
+    setTimeout(() => {
+      isSpinning.value = false; // Останавливаем анимацию после тайм-аута
+      console.log('Закончилось вращение (через тайм-аут)');
+    }, 1000 - elapsedTime); // Тайм-аут до 2 секунд
+  } else {
+    // Если загрузка заняла больше 2 секунд, останавливаем сразу
+    isSpinning.value = false;
+    console.log('Закончилось вращение');
+  }
+};
 </script>
+
+
+
+
+
 
 
 
@@ -41,7 +98,18 @@ export default defineComponent({
   list-style: none;
   text-transform: capitalize;
 }
+.updateNews {
+  transition: transform 1s;
+}
 
+.animate-rotate {
+  animation: rotate 1s linear infinite;
+}
+
+@keyframes rotate {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
 .newsSection {
   padding: 2rem 1rem;
   //width: 60%;

@@ -2,7 +2,7 @@ import { ref } from "vue";
 import {createRouter, createWebHistory, RouteRecordRaw} from 'vue-router';
 
 import MainPage from "@/pages/main-page.vue";
-import BlogPage from "@/features/blog/blog.vue";
+import BlogPage from "@/features/chat/chat.vue";
 import NewsPage from "@/features/news/news.vue";
 import NotFound from "@/pages/404.vue";
 import RulesPage from "@/pages/rules-page.vue";
@@ -26,7 +26,7 @@ declare module "vue-router" {
 const routes: Array<RouteRecordRaw> = [
     { path: '/', redirect: '/main' },
     { path: '/main', name: 'MainPage', component: MainPage },
-    { path: '/blog', name: 'BlogPage', component: BlogPage },
+    { path: '/chat', name: 'BlogPage', component: BlogPage },
     { path: '/news', name: 'NewsPage', component: NewsPage },
     { path: '/rules', name: 'RulesPage', component: RulesPage },
     { path: '/other', name: 'OtherPage', component: OtherPage },

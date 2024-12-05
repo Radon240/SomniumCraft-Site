@@ -23,9 +23,7 @@ const isWikiRoute = computed(() =>
 const isPersonalAccountRoute = computed(() =>
   route.path.startsWith('/account')
 );
-const logout = () => {
-  keycloakService.logout();
-};
+
 </script>
 
 

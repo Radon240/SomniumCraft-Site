@@ -25,7 +25,7 @@
 
 <script>
 import News from '@/features/news/news.vue';
-import Blog from '@/features/blog/blog.vue';
+import Blog from '@/features/chat/chat.vue';
 
 export default {
   components: {Blog, News},

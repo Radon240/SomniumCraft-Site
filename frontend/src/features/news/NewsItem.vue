@@ -1,14 +1,18 @@
 <script setup lang="ts">
 import { fetchNews } from "@/shared/api/fetchNews.js";
 import { ref, onMounted } from "vue";
+import {useNewsStore} from "@/stores/newsStore.ts";
 
 const news = ref([]);
+const newsStore = useNewsStore();
 
 // Асинхронная функция для загрузки новостей
 async function loadNews() {
   try {
-    news.value = await fetchNews(); // Предполагаем, что fetchNews возвращает массив новостей
-    sortNews(); // Сортируем новости после загрузки
+    const fetchedNews = await fetchNews(); // Предполагаем, что fetchNews возвращает массив новостей
+    newsStore.clearNews(); // Очищаем старые данные
+    fetchedNews.forEach((newsItem: any) => newsStore.addNews(newsItem)); // Добавляем новости в store
+    newsStore.sortNews();
   } catch (error) {
     console.error("Ошибка при загрузке новостей:", error);
   }
@@ -42,7 +46,7 @@ onMounted(async () => {
 
 <template>
 
-  <div v-for="newsItem in news" :key="newsItem.id" class="news-item flex items-center justify-end flex-col gap-[1vw] rounded-[30px] bg-no-repeat bg-top bg-cover" :style="{ backgroundImage: `url(${newsItem.img[0]})` }">
+  <div v-for="newsItem in newsStore.news" :key="newsItem.id" class="news-item flex items-center justify-end flex-col gap-[1vw] rounded-[30px] bg-no-repeat bg-top bg-cover" :style="{ backgroundImage: `url(${newsItem.img[0]})` }">
 
               <div class="text bg-background-element/80 backdrop-blur-[5px]">
                 <div class="title text-xl sm:text-base md:text-lg lg:text-xl xl:text-2xl ">{{ newsItem.title }}</div>
