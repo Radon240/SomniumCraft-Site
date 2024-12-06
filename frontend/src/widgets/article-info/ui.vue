@@ -33,7 +33,7 @@ const getAvatarUrl = (size: number, nickname: string) => `https://vzge.me/face/$
 <template>
   <div class="bg-gray-900 border border-blue-500 rounded-lg p-6 w-fit max-w-md max-h-fit">
     <div class="mb-6">
-      <h2 class="text-white text-2xl font-bold mb-2">Дата создания</h2>
+      <h2 class="text-white text-2xl font-bold mb-2">Дата ред.</h2>
       <p class="text-gray-300 text-xl">{{ formattedDate }}</p>
     </div>
 

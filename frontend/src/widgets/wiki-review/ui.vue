@@ -38,24 +38,24 @@ const onReviewSent = () => {
 </script>
 
 <template>
-  <div class="py-24 flex">
-    <div>
-      <h2 class="m-0">Pending revisions</h2>
+  <div class="py-24 ml-5 flex text-3xl">
+    <div class="pt-14">
+      <h2 class="">Ожидающие пересмотра</h2>
       <Divider class="mb-5" />
       <PendingReviewsList ref="pendingReviewsList" :selected-revision="revisionId" @select="onRevisionSelected" />
     </div>
-    <div class="flex-grow ml-5">
-      <h2 class="m-0">Revision review</h2>
+    <div class="flex-grow ml-5 ">
+      <h2 class="m-0">Обзор изменений</h2>
       <SelectButton
           v-model="selectedPreviewOption"
           :options="previewOptions"
           option-label="label"
       />
-      <Button label="Leave Review" @click="dialogVisible = true"></Button>
+      <Button label="Решение по статье" @click="dialogVisible = true"/>
       <Divider class="mb-5" />
       <div v-if="revisionId" class="container flex flex-column justify-content-center">
         <div v-if="revisionId != ' '" class="w-full flex-col">
-          <ArticleDiff v-if="selectedPreviewOption.mode === PreviewMode.DIFF" :new-revision-id="revisionId" />
+          <ArticleDiff v-if="selectedPreviewOption.mode === PreviewMode.DIFF" :new-revision-id="revisionId"/>
           <ReviewContent
               v-else
               :revision-id="revisionId"
