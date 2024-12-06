@@ -42,13 +42,14 @@ watch(() => [props.articleId, props.revisionId], loadArticle)
         <AlertCircle class="w-6 h-6 mr-2" />
         <span>{{ error }}</span>
       </div>
-
       <div v-else-if="article" class="markdown-content">
         <MdPreview
             :modelValue="article.content?.toString()"
             :id="article.id"
             theme="dark"
-            previewTheme="default"
+            previewTheme="github"
+            language="en-US"
+            style="background: transparent;"
         />
       </div>
     </div>
@@ -56,5 +57,4 @@ watch(() => [props.articleId, props.revisionId], loadArticle)
 </template>
 
 <style scoped>
-/* You can add any additional styles here if needed */
 </style>

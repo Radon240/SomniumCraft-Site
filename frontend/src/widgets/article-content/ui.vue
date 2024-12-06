@@ -14,7 +14,7 @@ const { article, loading, error } = storeToRefs(articleStore)
   <div class="bg-gray-900 rounded-lg shadow-md overflow-hidden">
     <div class="p-6">
       <Skeleton v-if="loading" width="70%" height="2rem" class="mb-2" />
-      <h1 v-else-if="article" class="text-2xl font-bold mb-4">{{ article.title }}</h1>
+      <h1 v-else-if="article" class="text-3xl font-bold mb-4 ml-4">{{ article.title }}</h1>
 
       <div v-if="loading" class="space-y-4">
         <Skeleton v-for="i in 3" :key="i" width="100%" height="1.5rem" />
@@ -26,11 +26,14 @@ const { article, loading, error } = storeToRefs(articleStore)
       </div>
 
       <div v-else-if="article" class="markdown-content">
+        <Divider/>
         <MdPreview
             :modelValue="article.content"
             :id="article.id"
             theme="dark"
-            previewTheme="default"
+            previewTheme="github"
+            language="en-US"
+            style="background: transparent;"
         />
       </div>
     </div>
