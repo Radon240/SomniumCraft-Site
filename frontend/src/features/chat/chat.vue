@@ -83,32 +83,26 @@
 
             </div>
           </div>
-          <div class="flex flex-row items-center h-16 rounded-xl bg-gray-700 w-full px-4">
-            <div>
-              <button class="flex items-center justify-center text-gray-400 hover:text-gray-200">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13"></path>
-                </svg>
-              </button>
-            </div>
+          <div v-if="authStore.isAuthenticated" class="flex flex-row items-center rounded-xl bg-gray-700 w-full px-4 h-auto py-2">
             <div class="flex-grow ml-4">
               <div class="relative w-full">
-                <input type="text" class="flex w-full border rounded-xl focus:outline-none focus:border-indigo-300 pl-4 h-10 bg-gray-600 text-gray-200"/>
-                <button class="absolute flex items-center justify-center h-full w-12 right-0 top-0 text-gray-400 hover:text-gray-200">
-                  <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                  </svg>
-                </button>
+                <input type="text"
+                       placeholder="Введите сообщение"
+                       class="flex w-full border rounded-xl focus:outline-none focus:border-indigo-300 px-4 h-10 bg-gray-600 text-gray-200"
+                v-model="chatMsg" />
+<!--                <textarea-->
+<!--                    placeholder="Введите сообщение"-->
+<!--                    class="flex w-full border rounded-xl focus:outline-none focus:border-indigo-300 px-4 bg-gray-600 text-gray-200 overflow-hidden py-2"-->
+<!--                    v-model="chatMsg"-->
+<!--                    @input="autoResize"-->
+<!--                    ref="textarea"-->
+<!--                ></textarea>-->
               </div>
             </div>
             <div class="ml-4">
-              <button class="flex items-center justify-center bg-indigo-500 hover:bg-indigo-600 rounded-xl text-white px-4 py-1 flex-shrink-0">
-                <span>Send</span>
-                <span class="ml-2">
-                                <svg class="w-4 h-4 transform rotate-45 -mt-px" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path>
-                                </svg>
-                            </span>
+              <button @click="sendMessage"
+                      class="flex items-center py-3 justify-center bg-indigo-500 hover:bg-indigo-600 rounded-xl text-white px-4 flex-shrink-0">
+                <font-awesome-icon :icon="['fas', 'paper-plane']"  />
               </button>
             </div>
           </div>
@@ -124,8 +118,63 @@ import Message from '@/features/chat/message.vue';
 import {fetchMessages} from "@/shared/api/fetchMessages.ts";
 import {useMessagesStore} from "@/stores/messagesStore.ts";
 import { nextTick } from 'vue';
+import useAuthStore from "@/entities/Auth/AuthStore.ts";
+import {sendMessageToServer} from "@/shared/api/sendMessage.ts";
+
+const authStore = useAuthStore();
+
+const chatMsg = ref('');
+
+
+// Метод для отправки сообщения
+async function sendMessage() {
+  if (!chatMsg.value.trim()) {
+    console.error("Сообщение не может быть пустым");
+    return;
+  }
+
+  const message = {
+    id: maxId + 1,
+    nickname: authStore.username,
+    avatar: 'src/resources/images/steve.png',
+    text: chatMsg.value,
+    timestamp: new Date().toISOString(), // Текущая дата/время в формате ISO
+    status: 'delivered',
+    messageType: 'text',
+    error: null,
+    replyTo: null,
+    attachments: [],
+    reactions: ['👍', '❤️'],
+    userColor: '#1E240',
+  };
+  console.log(JSON.stringify(message, null,2))
+  try {
+    // Отправляем сообщение
+    await sendMessageToServer(message);
+
+    // После отправки сообщения добавляем его в хранилище
+    await loadMessages();
+    await nextTick();  // Ждем, пока Vue завершит рендеринг
+    groupByDate();
+    await nextTick();
+    scrollToBottom();
+
+    // Прокручиваем к последнему сообщению
+    await nextTick();  // Ждем, пока Vue завершит рендеринг
+    scrollToBottom();
+    chatMsg.value = '';
+  } catch (error) {
+    console.error("Ошибка при отправке сообщения:", error);
+  }
+
+}
+
+
 
 const messageStore = useMessagesStore();
+const maxId = messageStore.messages.reduce((max, message) => {
+  return message.id > max ? message.id : max;
+}, 0);
 async function loadMessages() {
   try {
     const fetchedMessages = await fetchMessages();
@@ -233,6 +282,10 @@ function scrollToBottom() {
     console.error("Элемент .messages не найден");
   }
 }
+function autoResize(element) {
+  element.style.height = 'auto';
+  element.style.height = (element.scrollHeight) + 'px';
+}
 // Вызываем randomCircle после монтирования компонента
 onMounted(async () => {
   randomCircle();
@@ -248,6 +301,7 @@ watch(() => art.value?.offsetWidth, () => {
   randomCircle();
 
 });
+
 </script>
 
 
