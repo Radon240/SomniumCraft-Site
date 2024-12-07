@@ -112,9 +112,15 @@ onMounted(() => {
             <span class="text-nowrap w-1/2">Роли на сайте: </span>
             <span class="w-1/2 text-end text-xl md:text-xl lg:text-xl xl:text-xl text-white font-light text-wrap break-all ">{{ (roles.sort()).join(', ') }}</span>
           </div>
-
         </div>
-
+        <div v-if="roles.includes('admin') || roles.includes('editor')" class="w-full h-full flex justify-end gap-5 pt-5 ">
+          <router-link to="/review" class="w-fit bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-600 transition-all duration-300">
+            Ревью статей
+          </router-link>
+          <router-link to="/navigations/editor" class="w-fit bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-600 transition-all duration-300">
+            Редактирование меню вики
+          </router-link>
+        </div>
       </div>
     </div>
   </div>
