@@ -12,7 +12,7 @@
     </div>
     <div class="features-content bg-background w-full min-h-screen flex justify-center gap-12">
       <News />
-      <Blog/>
+      <Chat/>
 
 
     </div>
@@ -25,10 +25,10 @@
 
 <script>
 import News from '@/features/news/news.vue';
-import Blog from '@/features/chat/chat.vue';
+import Chat from "@/features/chat/chat.vue";
 
 export default {
-  components: {Blog, News},
+  components: {Chat, News},
   data() {
     return {
       showNotification: false
