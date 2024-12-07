@@ -73,7 +73,7 @@ const isPersonalAccountRoute = computed(() =>
             <font-awesome-icon :icon="['fas', 'user']" class="personalLogo font-semibold text-3xl md:text-3xl lg:text-3xl xl:text-3xl text-white text-nowrap mr-5"/>
             <button>Личный кабинет</button>
           </a>
-          <a v-if="!authStore.isAuthenticated" href="/account" target="_blank" class="w-full auth">
+          <a v-if="!authStore.isAuthenticated" target="_blank" class="w-full auth">
             <font-awesome-icon :icon="['fas', 'user']"
                                class="personalLogo font-semibold text-3xl md:text-3xl lg:text-3xl xl:text-3xl text-white text-nowrap mr-5"/>
             <button @click="keycloakService.login()">Войти</button>

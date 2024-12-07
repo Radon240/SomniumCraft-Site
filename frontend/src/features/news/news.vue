@@ -22,7 +22,6 @@
 </template>
 
 
-
 <script setup lang="ts">
 import NewsItem from "@/features/news/NewsItem.vue";
 import { fetchNews } from "@/shared/api/fetchNews.js";
@@ -76,11 +75,6 @@ const updateChats = async () => {
   }
 };
 </script>
-
-
-
-
-
 
 
 

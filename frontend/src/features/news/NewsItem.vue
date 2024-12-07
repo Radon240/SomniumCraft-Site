@@ -46,7 +46,7 @@ onMounted(async () => {
 
 <template>
 
-  <div v-for="newsItem in newsStore.news" :key="newsItem.id" class="news-item flex items-center justify-end flex-col gap-[1vw] rounded-[30px] bg-no-repeat bg-top bg-cover" :style="{ backgroundImage: `url(${newsItem.img[0]})` }">
+  <div v-for="newsItem in newsStore.news" :key="newsItem.id" class="news-item flex items-center justify-end flex-col gap-[1vw] rounded-[2rem] bg-no-repeat bg-top bg-cover" :style="{ backgroundImage: `url(${newsItem.img[0]})` }">
 
               <div class="text bg-background-element/80 backdrop-blur-[5px]">
                 <div class="title text-xl sm:text-base md:text-lg lg:text-xl xl:text-2xl ">{{ newsItem.title }}</div>
