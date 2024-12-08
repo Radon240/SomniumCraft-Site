@@ -114,9 +114,7 @@ const replyToMessage = (id: number) => {
   <div :class="messageStyle(nickname) + ' p-3 rounded-lg '"> <!-- Привязка класса с условием -->
     <div :class="messageStyleRow(nickname) + 'message flex items-start justify-start text-sm text-white gap-3 w-full'">
       <img
-          :src="authStore.isAuthenticated === false
-          ? '/steve.png'
-          : `https://mineskin.eu/helm/${nickname}`"
+          :src="`https://mineskin.eu/helm/${nickname}`"
           alt="Skin"
           draggable="true"
           class="rounded-[20%] h-10 w-10 "
