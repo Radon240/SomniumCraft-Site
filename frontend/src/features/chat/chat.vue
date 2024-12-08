@@ -86,6 +86,13 @@
           <div v-if="authStore.isAuthenticated" class="flex flex-row items-center rounded-xl bg-gray-700 w-full px-4 h-auto py-2">
             <div class="flex-grow ml-4">
               <div class="relative w-full">
+                <div v-if="replyToStore.replyTo != null" class="flex items-center repliedMessage text-sm text-white/60 mt-2 px-2 italic w-full mb-2">
+                  <span class="font-semibold italic w-full">{{messageStore.getMessage(replyToStore.replyTo).text}}</span>
+                  <button @click="replyToStore.setReplyTo(null)">
+                    <font-awesome-icon :icon="['fas', 'xmark']" class="text-xl text-white" />
+                  </button>
+
+                </div>
                 <input type="text"
                        placeholder="Введите сообщение"
                        class="flex w-full border rounded-xl focus:outline-none focus:border-indigo-300 px-4 h-10 bg-gray-600 text-gray-200"
@@ -120,11 +127,18 @@ import {useMessagesStore} from "@/stores/messagesStore.ts";
 import { nextTick } from 'vue';
 import useAuthStore from "@/entities/Auth/AuthStore.ts";
 import {sendMessageToServer} from "@/shared/api/sendMessage.ts";
+import {useChatStore} from "@/features/chat/sendingMessage.ts";
 
 const authStore = useAuthStore();
-
+const replyToStore = useChatStore();
 const chatMsg = ref('');
+const replyTo = ref(null);
 
+// Обработчик для получения данных от дочернего компонента
+const handleReplyToMessage = (replyToMessage) => {
+  replyTo.value = replyToMessage;
+  console.log(replyTo.value)// Сохраняем значение в реактивную переменную
+};
 
 // Метод для отправки сообщения
 async function sendMessage() {
@@ -142,7 +156,7 @@ async function sendMessage() {
     status: 'delivered',
     messageType: 'text',
     error: null,
-    replyTo: null,
+    replyTo: replyToStore.replyTo,
     attachments: [],
     reactions: ['👍', '❤️'],
     userColor: '#1E240',
@@ -163,6 +177,7 @@ async function sendMessage() {
     await nextTick();  // Ждем, пока Vue завершит рендеринг
     scrollToBottom();
     chatMsg.value = '';
+    replyToStore.setReplyTo(null);
   } catch (error) {
     console.error("Ошибка при отправке сообщения:", error);
   }
@@ -306,6 +321,9 @@ watch(() => art.value?.offsetWidth, () => {
 
 
 <style scoped>
+.repliedMessage{
+  border-left: 1px solid;
+}
 #circles {
 
   position: relative;

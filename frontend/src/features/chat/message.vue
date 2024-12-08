@@ -2,6 +2,9 @@
 import {computed, defineProps} from 'vue';
 import useAuthStore from "@/entities/Auth/AuthStore.ts";
 import {useMessagesStore} from "@/stores/messagesStore.ts";
+import {useChatStore} from "@/features/chat/sendingMessage.ts";
+
+
 
 // Определение пропсов
 defineProps({
@@ -91,7 +94,11 @@ const messagesStore = useMessagesStore();
 const repliedMessage = (replyTo: Number) => {
   return replyTo ? messagesStore.getMessage(replyTo) : null;
 }
+const replyToStore = useChatStore(); // Исправлено: вызов useChatStore()
 
+const replyToMessage = (id: number) => {
+  replyToStore.setReplyTo(id); // Теперь setReplyTo доступен
+};
 
 </script>
 
@@ -104,7 +111,7 @@ const repliedMessage = (replyTo: Number) => {
       <span class="time font-light text-white/50 w-full text-right pt-2">13:56</span>
     </div>
   </div>-->
-  <div :class="messageStyle(nickname) + ' p-3 rounded-lg'"> <!-- Привязка класса с условием -->
+  <div :class="messageStyle(nickname) + ' p-3 rounded-lg '"> <!-- Привязка класса с условием -->
     <div :class="messageStyleRow(nickname) + 'message flex items-start justify-start text-sm text-white gap-3 w-full'">
       <img
           :src="authStore.isAuthenticated === false
@@ -115,7 +122,7 @@ const repliedMessage = (replyTo: Number) => {
           class="rounded-[20%] h-10 w-10 "
       />
 
-      <div class="messageInfo max-w-[80%] min-w-[50%]  bg-[#272B3A] rounded-xl shadow py-2 px-4 flex flex-col justify-start items-start">
+      <div class="messageInfo max-w-[80%] min-w-[50%]  bg-[#272B3A] rounded-xl shadow py-2 px-4 flex flex-col justify-start items-start relative">
         <span class="text-sm font-semibold" :style="{ color: stringToHexColor(nickname) }">{{ nickname }}</span>
         <div v-if="repliedMessage(replyTo)" class="repliedMessage text-sm text-gray-400 mt-2 px-2 italic">
           Ответ на сообщение:
@@ -123,6 +130,9 @@ const repliedMessage = (replyTo: Number) => {
         </div>
 
         <div class="text-white text-sm  max-w-[100%] text-wrap break-word">{{ text }}</div>
+        <button @click="replyToMessage(id)" class="absolute right-0 mr-2">
+          <font-awesome-icon :icon="['fas', 'reply']" class="text-white/60"/>
+        </button>
         <span class="time font-light text-white/50 w-full text-right pt-2">{{time}}</span>
       </div>
     </div>
