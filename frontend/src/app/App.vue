@@ -6,6 +6,7 @@ import {useRoute} from 'vue-router';
 
 const route = useRoute();
 const isMainRoute = computed(() => route.path === '/main');
+const is404Route = computed(() => route.name === 'NotFound');
 </script>
 
 <template>
@@ -13,13 +14,13 @@ const isMainRoute = computed(() => route.path === '/main');
 
   <div id="app" class="w-vdw">
     <div v-show="isMainRoute" class="background-image"></div>
-    <Header />
+    <Header v-show="!is404Route" />
     <main>
       <transition name ="fade" mode="out-in" appear>
         <router-view />
       </transition>
     </main>
-    <Footer />
+    <Footer v-show="!is404Route" />
   </div>
 </template>
 
