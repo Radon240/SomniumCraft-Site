@@ -17,7 +17,7 @@ interface Message {
 
 export async function sendMessageToServer(message: Message): Promise<void> {
     try {
-        const response = await axios.post('https://737dc8bd49e8d910.mokky.dev/message', message, {
+        const response = await axios.post<Message>('https://737dc8bd49e8d910.mokky.dev/message', message, {
             headers: {
                 'Content-Type': 'application/json',
             },

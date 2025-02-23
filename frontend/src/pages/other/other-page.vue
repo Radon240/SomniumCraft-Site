@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, onMounted, nextTick } from 'vue';
-import ListItem from "@/pages/other/liItem.vue";
-import AccordionItem from "@/pages/other/AccordionSection.vue";
+import ListItem from "@/pages/other/li-Item.vue";
+import AccordionItem from "@/pages/other/accordion-section.vue";
 
 // Массив для управления состоянием каждого элемента аккордеона
 const accordionOpen = ref([false, false, false]);

@@ -23,7 +23,7 @@
 
 
 <script setup lang="ts">
-import NewsItem from "@/features/news/NewsItem.vue";
+import NewsItem from "@/features/news/news-item.vue";
 import { fetchNews } from "@/shared/api/fetchNews.js";
 import { useNewsStore } from "@/stores/newsStore.js";
 import { ref } from "vue";

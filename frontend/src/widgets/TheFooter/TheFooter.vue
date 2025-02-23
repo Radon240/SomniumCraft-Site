@@ -44,7 +44,7 @@
 
 
 footer{
-  background-image: url("@resources/images/backgroundIce.png"); /* Фон для основного контейнера */
+  background-image: url("@/resources/images/backgroundIce.png"); /* Фон для основного контейнера */
   background-repeat: no-repeat; /* Запрещаем повторение изображения */
   background-position: bottom center;
   background-size: cover; /* Масштабируем изображение по ширине контейнера */

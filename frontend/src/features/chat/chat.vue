@@ -1,38 +1,7 @@
 <template>
   <div class="chatSection w-[40rem] flex flex-col items-center rounded-[2rem] max-h-[30vw] overflow-y-hidden  ml-[3rem] mt-[2rem] relative mb-10">
     <span class="text-sm md:text-lg lg:text-xl xl:text-2xl text-white font-semibold  py-2 bg-second-background w-full text-center ">Чат</span>
-<!--
-  <div ref="art" id="circles" class="absolute top-0 left-0 w-full h-full z-0"></div>
 
-     Блок с сообщениями, который будет поверх фона
-    <div class="messages-container z-10 w-[90%] h-full absolute top-0 left-0 mt-10 mb-[10%] mr-2 ml-2">
-      Здесь отображаются сообщения
-
-      <div  class="message p-2 mb-2 bg-gray-800 text-white rounded-lg">
-        fsjsffsjksfjksf
-      </div>
-    </div>
-    <div class="inputField w-full bg-white h-[10%] text-black px-5 py-2">
-      <div class="relative w-95% mx-auto">
-        <input
-            class="focus:(ring-2) bg-transparent px3 py3 w-full outline-none overflow-hidden b b-gray b-opacity-30 transition rd-lg"
-            data-test="chat-input"
-            placeholder="Send your message..."
-            type="text"
-            v-model="chatMsg"
-            @keyup.enter="onSend"
-        />
-        <button
-            data-test="submit"
-            class="absolute right-0 bottom-0 top-0 hover:c-blue c-gray py2 px3 hfull focus:ring outline-none rd-r-lg transition"
-            type="submit"
-            @click="onSend"
-        >
-          <font-awesome-icon :icon="['fas', 'arrow-up']" />
-        </button>
-      </div>
-  </div>
--->
     <div class="  flex h-screen antialiasing text-gray-800 overflow-y-hidden bg-second-background w-full">
 
       <div class="  flex flex-col flex-auto bg-background/20"> <!--Окно сообщений -->
@@ -47,28 +16,7 @@
                   </span>
 
                 </div>
-              <!--  <div class="col-start-1 col-end-8 p-3 rounded-lg ">
 
-                  <div class="flex flex-row items-center">
-                    <div class="flex items-center justify-center h-10 w-10 rounded-full bg-indigo-500 flex-shrink-0">
-                      J
-                    </div>
-                    <div class="relative ml-3 text-sm bg-gray-700 py-2 px-4 shadow rounded-xl">
-                      <div class="text-gray-200">Hey, how's it going?</div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-start-6 col-end-13 p-3 rounded-lg">
-                  <div class="flex items-center justify-start flex-row-reverse">
-                    <div class="flex items-center justify-center h-10 w-10 rounded-full bg-indigo-500 flex-shrink-0">
-                      Y
-                    </div>
-                    <div class="relative mr-3 text-sm bg-indigo-600 py-2 px-4 shadow rounded-xl">
-                      <div class="text-white">I'm good, thanks! How about you?</div>
-                      <div class="absolute text-xs bottom-0 right-0 -mb-5 mr-2 text-gray-500">Seen</div>
-                    </div>
-                  </div>
-                </div>-->
                 <Message v-for="message in messages"
                          :id="message.id"
                          :avatarPath="message.avatarPath"

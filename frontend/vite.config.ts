@@ -28,7 +28,8 @@ export default defineConfig({
         target: 'https://api.mojang.com', // Целевой сервер
         changeOrigin: true, // Меняет Origin заголовок на целевой
         rewrite: (path) => path.replace(/^\/api/, ''), // Убираем /api из пути
-      }
+      },
+
     }
   }
 })

@@ -12,7 +12,7 @@ import WikiPlaceholder from "@/widgets/wiki-placeholder/ui.vue";
 import WikiArticlePage from "@/widgets/wiki-content/ui.vue";
 import WikiArticleEditor from "@/widgets/article-editor/ui.vue"
 import WikiReview from "@/widgets/wiki-review/ui.vue"
-import PersonalAccountPage from "@/pages/personalAccount-page.vue";
+import PersonalAccountPage from "@/pages/personal-account-page.vue";
 import {UserRole} from "@/entities/Auth/UserRole.ts";
 import {keycloakService} from "@/shared/service/keycloakService.ts";
 import useAuthStore from "@/entities/Auth/AuthStore.ts";

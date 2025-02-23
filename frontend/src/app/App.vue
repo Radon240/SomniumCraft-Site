@@ -1,6 +1,6 @@
 <script setup>
-import Header from '@/widgets/header/Header.vue';
-import Footer from '@/widgets/Footer.vue';
+import Header from '@/widgets/TheHeader/TheHeader.vue';
+import Footer from '@/widgets/TheFooter/TheFooter.vue';
 import {computed} from 'vue';
 import {useRoute} from 'vue-router';
 
@@ -12,7 +12,7 @@ const is404Route = computed(() => route.name === 'NotFound');
 <template>
 
 
-  <div id="app" class="w-vdw">
+  <div id="app" class="container">
     <div v-show="isMainRoute" class="background-image"></div>
     <Header v-show="!is404Route" />
     <main>
@@ -63,7 +63,7 @@ html, body{
 }
 
 header {
-  /* Styling for the header if needed */
+  /* Styling for the TheHeader if needed */
 }
 
 main {
